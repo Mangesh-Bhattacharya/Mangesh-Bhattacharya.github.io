@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mangesh Bhattacharya | Master's in IT Security (AI Specialization)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #1a1f35;
+      --secondary: #2a3150;
+      --accent: #4a90e2;
+      --accent-light: #6ba3e8;
+      --success: #2ecc71;
+      --warning: #f39c12;
+      --text: #e8eaf0;
+      --text-muted: #a0a8c0;
+      --border: #3a4060;
+      --card-bg: #232842;
+      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-2: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--primary);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+    
+    /* Header */
+    header {
+      background: rgba(26, 31, 53, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+    
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover { color: var(--accent-light); }
+    
+    /* Hero */
+    .hero {
+      padding: 8rem 0 4rem;
+      background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1), transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(74, 144, 226, 0.1), transparent 50%);
+    }
+    
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .hero-badge {
+      display: inline-block;
+      background: rgba(74, 144, 226, 0.15);
+      color: var(--accent-light);
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(74, 144, 226, 0.3);
+    }
+    
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #e8eaf0 0%, #a0a8c0 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .hero .subtitle {
+      font-size: 1.3rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+    
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .stat-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: var(--gradient-2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    
+    /* Section */
+    section {
+      padding: 4rem 0;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+    
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .project-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(74, 144, 226, 0.2);
+    }
+    
+    .project-header {
+      padding: 1.5rem;
+      background: var(--gradient-2);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    
+    .project-status {
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .status-completed { background: var(--success) !important; }
+    .status-progress { background: var(--warning) !important; }
+    
+    .project-body {
+      padding: 1.5rem;
+    }
+    
+    .project-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .project-meta {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    .project-meta i {
+      color: var(--accent);
+      margin-right: 0.3rem;
+    }
+    
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .tech-tag {
+      background: rgba(74, 144, 226, 0.15);
+      color: var(--accent-light);
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.75rem;
+      border: 1px solid rgba(74, 144, 226, 0.3);
+    }
+    
+    .project-links {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+    
+    .btn-primary {
+      background: var(--gradient-2);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+    }
+    
+    .btn-outline {
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      background: transparent;
+    }
+    
+    .btn-outline:hover {
+      background: rgba(74, 144, 226, 0.1);
+    }
+    
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-muted);
+    }
+    
+    .spinner {
+      border: 3px solid var(--border);
+      border-top: 3px solid var(--accent);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Filter */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+      padding: 0.6rem 1.5rem;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+    }
+    
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--gradient-2);
+      color: white;
+      border-color: var(--accent);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--secondary);
+      padding: 3rem 0 1.5rem;
+      margin-top: 4rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-about h3 {
+      margin-bottom: 1rem;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .footer-about p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: var(--card-bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.3s;
+      border: 1px solid var(--border);
+    }
+    
+    .social-link:hover {
+      background: var(--gradient-2);
+      transform: translateY(-3px);
+    }
+    
+    .footer-links h4 {
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    
+    .footer-links ul {
+      list-style: none;
+    }
+    
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+      transition: color 0.3s;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent-light);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero h1 { font-size: 2.5rem; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid { grid-template-columns: 1fr; }
+      .footer-content { grid-template-columns: 1fr; }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2rem; }
+      .section-header h2 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">Mangesh Bhattacharya</div>
+        <ul class="nav-links">
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="https://www.linkedin.com/in/mangesh-bhattacharya/" target="_blank">LinkedIn</a></li>
+          <li><a href="https://github.com/Mangesh-Bhattacharya" target="_blank">GitHub</a></li>
+          <li><a href="https://tryhackme.com/p/TheOrbiter" target="_blank">TryHackMe</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-badge">Master's in IT Security | AI Specialization</span>
+        <h1>Mangesh Bhattacharya</h1>
+        <p class="subtitle">Cybersecurity Researcher | Threat Intelligence | AI-Powered Security Solutions</p>
+        
+        <div class="hero-stats">
+          <div class="stat-card">
+            <div class="stat-number" id="totalProjects">0</div>
+            <div class="stat-label">Total Projects</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="activeProjects">0</div>
+            <div class="stat-label">Active Projects</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="totalStars">0</div>
+            <div class="stat-label">GitHub Stars</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="languages">0</div>
+            <div class="stat-label">Technologies</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <div class="section-header">
+        <h2>Research & Development Projects</h2>
+        <p>Real-time updates from GitHub repositories</p>
+      </div>
+      
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="ai">AI & ML</button>
+        <button class="filter-btn" data-filter="security">Security</button>
+        <button class="filter-btn" data-filter="cloud">Cloud</button>
+        <button class="filter-btn" data-filter="network">Network</button>
+      </div>
+      
+      <div id="projectsContainer">
+        <div class="loading">
+          <div class="spinner"></div>
+          <p>Loading projects from GitHub...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3>Mangesh Bhattacharya</h3>
+          <p>Master's student specializing in IT Security with AI focus. Passionate about threat intelligence, detection engineering, and building secure AI-powered solutions.</p>
+          <div class="social-links">
+            <a href="https://github.com/Mangesh-Bhattacharya" class="social-link" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/mangesh-bhattacharya/" class="social-link" target="_blank">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://tryhackme.com/p/TheOrbiter" class="social-link" target="_blank">
+              <i class="fas fa-shield-alt"></i>
+            </a>
+            <a href="mailto:mangesh.bhattacharya@ontariotechu.net" class="social-link">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="https://www.linkedin.com/in/mangesh-bhattacharya/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://github.com/Mangesh-Bhattacharya" target="_blank">GitHub Profile</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Education</h4>
+          <ul>
+            <li><a href="#">Ontario Tech University</a></li>
+            <li><a href="#">Seneca Polytechnic</a></li>
+            <li><a href="#">Humber Polytechnic</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2025 Mangesh Bhattacharya. All rights reserved. | Auto-updated from GitHub</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const GITHUB_USERNAME = 'Mangesh-Bhattacharya';
+    const GITHUB_API = `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`;
+    
+    // Category keywords for intelligent filtering
+    const CATEGORIES = {
+      ai: ['ai', 'ml', 'machine-learning', 'neural', 'deep-learning', 'intelligence', 'anomaly', 'detection'],
+      security: ['security', 'threat', 'vulnerability', 'ransomware', 'scan', 'recon', 'pentest', 'red-team', 'stealth'],
+      cloud: ['cloud', 'aws', 'azure', 'docker', 'kubernetes', 'canarie'],
+      network: ['network', 'cisco', 'topology', 'nmap', 'packet']
+    };
+    
+    let allProjects = [];
+    
+    async function fetchProjects() {
+      try {
+        const response = await fetch(GITHUB_API);
+        const repos = await response.json();
+        
+        // Filter out forks and process repos
+        allProjects = repos
+          .filter(repo => !repo.fork)
+          .map(repo => ({
+            name: repo.name,
+            description: repo.description || 'No description available',
+            url: repo.html_url,
+            language: repo.language || 'Unknown',
+            stars: repo.stargazers_count,
+            forks: repo.forks_count,
+            updated: new Date(repo.updated_at),
+            created: new Date(repo.created_at),
+            homepage: repo.homepage,
+            topics: repo.topics || [],
+            isRecent: (new Date() - new Date(repo.updated_at)) / (1000 * 60 * 60 * 24) < 30
+          }))
+          .sort((a, b) => b.updated - a.updated);
+        
+        updateStats();
+        displayProjects(allProjects);
+      } catch (error) {
+        document.getElementById('projectsContainer').innerHTML = `
+          <div class="loading">
+            <p style="color: #f39c12;">Error loading projects. Please refresh the page.</p>
+          </div>
+        `;
+      }
+    }
+    
+    function updateStats() {
+      const totalStars = allProjects.reduce((sum, p) => sum + p.stars, 0);
+      const languages = new Set(allProjects.map(p => p.language).filter(l => l !== 'Unknown'));
+      const activeProjects = allProjects.filter(p => p.isRecent).length;
+      
+      document.getElementById('totalProjects').textContent = allProjects.length;
+      document.getElementById('activeProjects').textContent = activeProjects;
+      document.getElementById('totalStars').textContent = totalStars;
+      document.getElementById('languages').textContent = languages.size;
+    }
+    
+    function categorizeProject(project) {
+      const text = `${project.name} ${project.description} ${project.topics.join(' ')}`.toLowerCase();
+      const categories = [];
+      
+      for (const [category, keywords] of Object.entries(CATEGORIES)) {
+        if (keywords.some(keyword => text.includes(keyword))) {
+          categories.push(category);
+        }
+      }
+      
+      return categories.length > 0 ? categories : ['other'];
+    }
+    
+    function displayProjects(projects) {
+      const container = document.getElementById('projectsContainer');
+      
+      if (projects.length === 0) {
+        container.innerHTML = '<div class="loading"><p>No projects found.</p></div>';
+        return;
+      }
+      
+      const html = `
+        <div class="projects-grid">
+          ${projects.map(project => {
+            const categories = categorizeProject(project);
+            const status = project.isRecent ? 'In Progress' : 'Completed';
+            const statusClass = project.isRecent ? 'status-progress' : 'status-completed';
+            const formattedDate = project.updated.toISOString().split('T')[0];
+            const formattedTime = project.updated.toTimeString().split(' ')[0];
+            
+            return `
+              <div class="project-card" data-categories="${categories.join(' ')}">
+                <div class="project-header">
+                  <div class="project-title">${formatProjectName(project.name)}</div>
+                  <div class="project-status ${statusClass}">${status}</div>
+                </div>
+                <div class="project-body">
+                  <p class="project-desc">${project.description}</p>
+                  
+                  <div class="project-meta">
+                    <span><i class="far fa-calendar"></i>${formattedDate}</span>
+                    <span><i class="far fa-clock"></i>${formattedTime}</span>
+                    ${project.stars > 0 ? `<span><i class="far fa-star"></i>${project.stars}</span>` : ''}
+                  </div>
+                  
+                  <div class="project-tech">
+                    ${project.language !== 'Unknown' ? `<span class="tech-tag">${project.language}</span>` : ''}
+                    ${project.topics.slice(0, 3).map(topic => `<span class="tech-tag">${topic}</span>`).join('')}
+                  </div>
+                  
+                  <div class="project-links">
+                    <a href="${project.url}" class="btn btn-primary" target="_blank">
+                      <i class="fab fa-github"></i> View Repository
+                    </a>
+                    ${project.homepage ? `<a href="${project.homepage}" class="btn btn-outline" target="_blank"><i class="fas fa-external-link-alt"></i> Demo</a>` : ''}
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+      
+      container.innerHTML = html;
+    }
+    
+    function formatProjectName(name) {
+      return name
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+    }
+    
+    // Filter functionality
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const filter = btn.dataset.filter;
+        
+        if (filter === 'all') {
+          displayProjects(allProjects);
+        } else {
+          const filtered = allProjects.filter(project => {
+            const categories = categorizeProject(project);
+            return categories.includes(filter);
+          });
+          displayProjects(filtered);
+        }
+      });
+    });
+    
+    // Auto-refresh every 5 minutes
+    setInterval(fetchProjects, 5 * 60 * 1000);
+    
+    // Initial load
+    fetchProjects();
+  </script>
+</body>
+</html>

@@ -6,7 +6,7 @@
   <title>Mangesh Bhattacharya | Master's in IT Security (AI Specialization)</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    :root {
+    :root[data-theme="blue"] {
       --primary: #1a1f35;
       --secondary: #2a3150;
       --accent: #4a90e2;
@@ -21,6 +21,51 @@
       --gradient-2: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
     }
     
+    :root[data-theme="purple"] {
+      --primary: #1a1625;
+      --secondary: #2a2540;
+      --accent: #9b59b6;
+      --accent-light: #b57edc;
+      --success: #2ecc71;
+      --warning: #f39c12;
+      --text: #e8eaf0;
+      --text-muted: #a0a8c0;
+      --border: #3a3060;
+      --card-bg: #231e38;
+      --gradient-1: linear-gradient(135deg, #8e44ad 0%, #c0392b 100%);
+      --gradient-2: linear-gradient(135deg, #9b59b6 0%, #7d3c98 100%);
+    }
+    
+    :root[data-theme="green"] {
+      --primary: #1a2520;
+      --secondary: #253530;
+      --accent: #27ae60;
+      --accent-light: #52c77a;
+      --success: #2ecc71;
+      --warning: #f39c12;
+      --text: #e8eaf0;
+      --text-muted: #a0a8c0;
+      --border: #304540;
+      --card-bg: #1e2f28;
+      --gradient-1: linear-gradient(135deg, #16a085 0%, #27ae60 100%);
+      --gradient-2: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
+    }
+    
+    :root[data-theme="orange"] {
+      --primary: #251a15;
+      --secondary: #352a25;
+      --accent: #e67e22;
+      --accent-light: #f39c12;
+      --success: #2ecc71;
+      --warning: #f39c12;
+      --text: #e8eaf0;
+      --text-muted: #a0a8c0;
+      --border: #453530;
+      --card-bg: #2f231e;
+      --gradient-1: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+      --gradient-2: linear-gradient(135deg, #e67e22 0%, #ca6f1e 100%);
+    }
+    
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
@@ -29,6 +74,7 @@
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
+      transition: background 0.3s ease;
     }
     
     .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
@@ -64,6 +110,7 @@
       display: flex;
       list-style: none;
       gap: 2rem;
+      align-items: center;
     }
     
     .nav-links a {
@@ -75,6 +122,37 @@
     
     .nav-links a:hover { color: var(--accent-light); }
     
+    /* Theme Switcher */
+    .theme-switcher {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    
+    .theme-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .theme-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(255,255,255,0.3);
+    }
+    
+    .theme-btn.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 15px var(--accent);
+    }
+    
+    .theme-blue { background: linear-gradient(135deg, #4a90e2, #357abd); }
+    .theme-purple { background: linear-gradient(135deg, #9b59b6, #7d3c98); }
+    .theme-green { background: linear-gradient(135deg, #27ae60, #1e8449); }
+    .theme-orange { background: linear-gradient(135deg, #e67e22, #ca6f1e); }
+    
     /* Hero */
     .hero {
       padding: 8rem 0 4rem;
@@ -83,9 +161,33 @@
     }
     
     .hero-content {
-      max-width: 900px;
+      max-width: 1200px;
       margin: 0 auto;
-      text-align: center;
+    }
+    
+    .hero-main {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 3rem;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+    
+    .profile-image-container {
+      position: relative;
+    }
+    
+    .profile-image {
+      width: 300px;
+      height: 300px;
+      border-radius: 20px;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+    
+    .hero-text {
+      text-align: left;
     }
     
     .hero-badge {
@@ -110,8 +212,22 @@
     
     .hero .subtitle {
       font-size: 1.3rem;
+      color: var(--accent-light);
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+    
+    .hero .intro-text {
       color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
       margin-bottom: 2rem;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
     }
     
     .hero-stats {
@@ -127,6 +243,11 @@
       border-radius: 12px;
       border: 1px solid var(--border);
       text-align: center;
+      transition: transform 0.3s;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-5px);
     }
     
     .stat-number {
@@ -205,11 +326,8 @@
       border-radius: 20px;
       font-size: 0.75rem;
       font-weight: 600;
-      background: rgba(255, 255, 255, 0.2);
+      background: var(--success);
     }
-    
-    .status-completed { background: var(--success) !important; }
-    .status-progress { background: var(--warning) !important; }
     
     .project-body {
       padding: 1.5rem;
@@ -270,6 +388,8 @@
       align-items: center;
       gap: 0.5rem;
       font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
     }
     
     .btn-primary {
@@ -424,6 +544,13 @@
     
     /* Responsive */
     @media (max-width: 992px) {
+      .hero-main { 
+        grid-template-columns: 1fr; 
+        text-align: center;
+      }
+      .hero-text { text-align: center; }
+      .profile-image-container { margin: 0 auto; }
+      .cta-buttons { justify-content: center; }
       .hero h1 { font-size: 2.5rem; }
       .hero-stats { grid-template-columns: repeat(2, 1fr); }
       .projects-grid { grid-template-columns: 1fr; }
@@ -434,6 +561,7 @@
       .nav-links { display: none; }
       .hero h1 { font-size: 2rem; }
       .section-header h2 { font-size: 2rem; }
+      .profile-image { width: 250px; height: 250px; }
     }
   </style>
 </head>
@@ -443,30 +571,62 @@
       <nav>
         <div class="logo">Mangesh Bhattacharya</div>
         <ul class="nav-links">
+          <li><a href="#about">About</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="https://www.linkedin.com/in/mangesh-bhattacharya/" target="_blank">LinkedIn</a></li>
           <li><a href="https://github.com/Mangesh-Bhattacharya" target="_blank">GitHub</a></li>
-          <li><a href="https://tryhackme.com/p/TheOrbiter" target="_blank">TryHackMe</a></li>
+          <li>
+            <div class="theme-switcher">
+              <button class="theme-btn theme-blue active" onclick="setTheme('blue')" title="Blue Theme"></button>
+              <button class="theme-btn theme-purple" onclick="setTheme('purple')" title="Purple Theme"></button>
+              <button class="theme-btn theme-green" onclick="setTheme('green')" title="Green Theme"></button>
+              <button class="theme-btn theme-orange" onclick="setTheme('orange')" title="Orange Theme"></button>
+            </div>
+          </li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <section class="hero">
+  <section class="hero" id="about">
     <div class="container">
       <div class="hero-content">
-        <span class="hero-badge">Master's in IT Security | AI Specialization</span>
-        <h1>Mangesh Bhattacharya</h1>
-        <p class="subtitle">Cybersecurity Researcher | Threat Intelligence | AI-Powered Security Solutions</p>
+        <div class="hero-main">
+          <div class="profile-image-container">
+            <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/315eec9e-b7b6-42a3-874d-e819652c6a8e/2025-12-16T23-15-01-978Z-218aae2e-Profile-Mangesh-Bhattacharya.pdf" 
+                 alt="Mangesh Bhattacharya" 
+                 class="profile-image"
+                 onerror="this.src='https://via.placeholder.com/300x300/4a90e2/ffffff?text=MB'">
+          </div>
+          
+          <div class="hero-text">
+            <span class="hero-badge">Master's in IT Security | AI Specialization</span>
+            <h1>Mangesh Bhattacharya</h1>
+            <p class="subtitle">Cybersecurity Researcher | Threat Intelligence Analyst | AI Security Engineer</p>
+            
+            <p class="intro-text">
+              I am a graduate student at the University of Ontario Institute of Technology, pursuing a Master's degree in Information Technology Security with a specialization in Artificial Intelligence. My research focuses on developing intelligent security solutions that combine advanced threat detection, machine learning algorithms, and cloud-based architectures to address modern cybersecurity challenges.
+            </p>
+            
+            <p class="intro-text">
+              With expertise spanning network security, penetration testing, and AI-powered analytics, I design and implement innovative systems that enhance organizational security posture. My work bridges theoretical research and practical application, creating tools that detect anomalies, automate threat intelligence workflows, and strengthen defense mechanisms against evolving cyber threats.
+            </p>
+            
+            <div class="cta-buttons">
+              <a href="#projects" class="btn btn-primary">
+                <i class="fas fa-code"></i> View Projects
+              </a>
+              <a href="https://www.linkedin.com/in/mangesh-bhattacharya/" target="_blank" class="btn btn-outline">
+                <i class="fab fa-linkedin"></i> Connect on LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
         
         <div class="hero-stats">
           <div class="stat-card">
             <div class="stat-number" id="totalProjects">0</div>
-            <div class="stat-label">Total Projects</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number" id="activeProjects">0</div>
-            <div class="stat-label">Active Projects</div>
+            <div class="stat-label">Completed Projects</div>
           </div>
           <div class="stat-card">
             <div class="stat-number" id="totalStars">0</div>
@@ -475,6 +635,10 @@
           <div class="stat-card">
             <div class="stat-number" id="languages">0</div>
             <div class="stat-label">Technologies</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">15+</div>
+            <div class="stat-label">Certifications</div>
           </div>
         </div>
       </div>
@@ -485,7 +649,7 @@
     <div class="container">
       <div class="section-header">
         <h2>Research & Development Projects</h2>
-        <p>Real-time updates from GitHub repositories</p>
+        <p>Completed projects showcasing expertise in cybersecurity, AI, and cloud technologies</p>
       </div>
       
       <div class="filter-bar">
@@ -499,7 +663,7 @@
       <div id="projectsContainer">
         <div class="loading">
           <div class="spinner"></div>
-          <p>Loading projects from GitHub...</p>
+          <p>Loading completed projects from GitHub...</p>
         </div>
       </div>
     </div>
@@ -510,7 +674,7 @@
       <div class="footer-content">
         <div class="footer-about">
           <h3>Mangesh Bhattacharya</h3>
-          <p>Master's student specializing in IT Security with AI focus. Passionate about threat intelligence, detection engineering, and building secure AI-powered solutions.</p>
+          <p>Master's student at the University of Ontario Institute of Technology, specializing in IT Security with AI focus. Passionate about developing intelligent security solutions and advancing cybersecurity research.</p>
           <div class="social-links">
             <a href="https://github.com/Mangesh-Bhattacharya" class="social-link" target="_blank">
               <i class="fab fa-github"></i>
@@ -530,6 +694,7 @@
         <div class="footer-links">
           <h4>Quick Links</h4>
           <ul>
+            <li><a href="#about">About</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="https://www.linkedin.com/in/mangesh-bhattacharya/" target="_blank">LinkedIn</a></li>
             <li><a href="https://github.com/Mangesh-Bhattacharya" target="_blank">GitHub Profile</a></li>
@@ -539,15 +704,15 @@
         <div class="footer-links">
           <h4>Education</h4>
           <ul>
-            <li><a href="#">Ontario Tech University</a></li>
-            <li><a href="#">Seneca Polytechnic</a></li>
-            <li><a href="#">Humber Polytechnic</a></li>
+            <li><a href="https://ontariotechu.ca/" target="_blank">Ontario Tech University</a></li>
+            <li><a href="https://www.senecapolytechnic.ca/" target="_blank">Seneca Polytechnic</a></li>
+            <li><a href="https://humber.ca/" target="_blank">Humber Polytechnic</a></li>
           </ul>
         </div>
       </div>
       
       <div class="copyright">
-        <p>&copy; 2025 Mangesh Bhattacharya. All rights reserved. | Auto-updated from GitHub</p>
+        <p>&copy; 2025 Mangesh Bhattacharya. All rights reserved. | Real-time updates from GitHub | Last updated: <span id="lastUpdate"></span></p>
       </div>
     </div>
   </footer>
@@ -558,25 +723,38 @@
     
     // Category keywords for intelligent filtering
     const CATEGORIES = {
-      ai: ['ai', 'ml', 'machine-learning', 'neural', 'deep-learning', 'intelligence', 'anomaly', 'detection'],
-      security: ['security', 'threat', 'vulnerability', 'ransomware', 'scan', 'recon', 'pentest', 'red-team', 'stealth'],
+      ai: ['ai', 'ml', 'machine-learning', 'neural', 'deep-learning', 'intelligence', 'anomaly', 'detection', 'automated', 'analysis'],
+      security: ['security', 'threat', 'vulnerability', 'ransomware', 'scan', 'recon', 'pentest', 'red-team', 'stealth', 'detection'],
       cloud: ['cloud', 'aws', 'azure', 'docker', 'kubernetes', 'canarie'],
       network: ['network', 'cisco', 'topology', 'nmap', 'packet']
     };
     
     let allProjects = [];
     
+    // Theme Management
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      
+      document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelector(`.theme-${theme}`).classList.add('active');
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'blue';
+    setTheme(savedTheme);
+    
     async function fetchProjects() {
       try {
         const response = await fetch(GITHUB_API);
         const repos = await response.json();
         
-        // Filter out forks and process repos
+        // Filter: only non-forks AND completed projects (not updated in last 30 days)
         allProjects = repos
           .filter(repo => !repo.fork)
           .map(repo => ({
             name: repo.name,
-            description: repo.description || 'No description available',
+            description: repo.description || 'Advanced cybersecurity and AI research project',
             url: repo.html_url,
             language: repo.language || 'Unknown',
             stars: repo.stargazers_count,
@@ -585,12 +763,14 @@
             created: new Date(repo.created_at),
             homepage: repo.homepage,
             topics: repo.topics || [],
-            isRecent: (new Date() - new Date(repo.updated_at)) / (1000 * 60 * 60 * 24) < 30
+            daysSinceUpdate: (new Date() - new Date(repo.updated_at)) / (1000 * 60 * 60 * 24)
           }))
+          .filter(repo => repo.daysSinceUpdate >= 30) // Only completed projects
           .sort((a, b) => b.updated - a.updated);
         
         updateStats();
         displayProjects(allProjects);
+        updateLastUpdateTime();
       } catch (error) {
         document.getElementById('projectsContainer').innerHTML = `
           <div class="loading">
@@ -603,12 +783,22 @@
     function updateStats() {
       const totalStars = allProjects.reduce((sum, p) => sum + p.stars, 0);
       const languages = new Set(allProjects.map(p => p.language).filter(l => l !== 'Unknown'));
-      const activeProjects = allProjects.filter(p => p.isRecent).length;
       
       document.getElementById('totalProjects').textContent = allProjects.length;
-      document.getElementById('activeProjects').textContent = activeProjects;
       document.getElementById('totalStars').textContent = totalStars;
       document.getElementById('languages').textContent = languages.size;
+    }
+    
+    function updateLastUpdateTime() {
+      const now = new Date();
+      const formatted = now.toLocaleString('en-US', { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric', 
+        hour: '2-digit', 
+        minute: '2-digit' 
+      });
+      document.getElementById('lastUpdate').textContent = formatted;
     }
     
     function categorizeProject(project) {
@@ -628,7 +818,7 @@
       const container = document.getElementById('projectsContainer');
       
       if (projects.length === 0) {
-        container.innerHTML = '<div class="loading"><p>No projects found.</p></div>';
+        container.innerHTML = '<div class="loading"><p>No completed projects found. Check back soon!</p></div>';
         return;
       }
       
@@ -636,8 +826,6 @@
         <div class="projects-grid">
           ${projects.map(project => {
             const categories = categorizeProject(project);
-            const status = project.isRecent ? 'In Progress' : 'Completed';
-            const statusClass = project.isRecent ? 'status-progress' : 'status-completed';
             const formattedDate = project.updated.toISOString().split('T')[0];
             const formattedTime = project.updated.toTimeString().split(' ')[0];
             
@@ -645,7 +833,7 @@
               <div class="project-card" data-categories="${categories.join(' ')}">
                 <div class="project-header">
                   <div class="project-title">${formatProjectName(project.name)}</div>
-                  <div class="project-status ${statusClass}">${status}</div>
+                  <div class="project-status">Completed</div>
                 </div>
                 <div class="project-body">
                   <p class="project-desc">${project.description}</p>
@@ -658,7 +846,7 @@
                   
                   <div class="project-tech">
                     ${project.language !== 'Unknown' ? `<span class="tech-tag">${project.language}</span>` : ''}
-                    ${project.topics.slice(0, 3).map(topic => `<span class="tech-tag">${topic}</span>`).join('')}
+                    ${project.topics.slice(0, 4).map(topic => `<span class="tech-tag">${topic}</span>`).join('')}
                   </div>
                   
                   <div class="project-links">

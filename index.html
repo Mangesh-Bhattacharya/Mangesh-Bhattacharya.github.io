@@ -1,902 +1,469 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mangesh Bhattacharya | Master's in IT Security (AI Specialization)</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root[data-theme="blue"] {
-      --primary: #1a1f35;
-      --secondary: #2a3150;
-      --accent: #4a90e2;
-      --accent-light: #6ba3e8;
-      --success: #2ecc71;
-      --warning: #f39c12;
-      --text: #e8eaf0;
-      --text-muted: #a0a8c0;
-      --border: #3a4060;
-      --card-bg: #232842;
-      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-2: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-    }
-    
-    :root[data-theme="purple"] {
-      --primary: #1a1625;
-      --secondary: #2a2540;
-      --accent: #9b59b6;
-      --accent-light: #b57edc;
-      --success: #2ecc71;
-      --warning: #f39c12;
-      --text: #e8eaf0;
-      --text-muted: #a0a8c0;
-      --border: #3a3060;
-      --card-bg: #231e38;
-      --gradient-1: linear-gradient(135deg, #8e44ad 0%, #c0392b 100%);
-      --gradient-2: linear-gradient(135deg, #9b59b6 0%, #7d3c98 100%);
-    }
-    
-    :root[data-theme="green"] {
-      --primary: #1a2520;
-      --secondary: #253530;
-      --accent: #27ae60;
-      --accent-light: #52c77a;
-      --success: #2ecc71;
-      --warning: #f39c12;
-      --text: #e8eaf0;
-      --text-muted: #a0a8c0;
-      --border: #304540;
-      --card-bg: #1e2f28;
-      --gradient-1: linear-gradient(135deg, #16a085 0%, #27ae60 100%);
-      --gradient-2: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
-    }
-    
-    :root[data-theme="orange"] {
-      --primary: #251a15;
-      --secondary: #352a25;
-      --accent: #e67e22;
-      --accent-light: #f39c12;
-      --success: #2ecc71;
-      --warning: #f39c12;
-      --text: #e8eaf0;
-      --text-muted: #a0a8c0;
-      --border: #453530;
-      --card-bg: #2f231e;
-      --gradient-1: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
-      --gradient-2: linear-gradient(135deg, #e67e22 0%, #ca6f1e 100%);
-    }
-    
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--primary);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-      transition: background 0.3s ease;
-    }
-    
-    .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
-    
-    /* Header */
-    header {
-      background: rgba(26, 31, 53, 0.95);
-      backdrop-filter: blur(10px);
-      padding: 1rem 0;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid var(--border);
-    }
-    
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-      align-items: center;
-    }
-    
-    .nav-links a {
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    
-    .nav-links a:hover { color: var(--accent-light); }
-    
-    /* Theme Switcher */
-    .theme-switcher {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-    }
-    
-    .theme-btn {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    
-    .theme-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 10px rgba(255,255,255,0.3);
-    }
-    
-    .theme-btn.active {
-      border-color: var(--accent);
-      box-shadow: 0 0 15px var(--accent);
-    }
-    
-    .theme-blue { background: linear-gradient(135deg, #4a90e2, #357abd); }
-    .theme-purple { background: linear-gradient(135deg, #9b59b6, #7d3c98); }
-    .theme-green { background: linear-gradient(135deg, #27ae60, #1e8449); }
-    .theme-orange { background: linear-gradient(135deg, #e67e22, #ca6f1e); }
-    
-    /* Hero */
-    .hero {
-      padding: 8rem 0 4rem;
-      background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1), transparent 50%),
-                  radial-gradient(circle at 80% 80%, rgba(74, 144, 226, 0.1), transparent 50%);
-    }
-    
-    .hero-content {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .hero-main {
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 3rem;
-      align-items: center;
-      margin-bottom: 3rem;
-    }
-    
-    .profile-image-container {
-      position: relative;
-    }
-    
-    .profile-image {
-      width: 300px;
-      height: 300px;
-      border-radius: 20px;
-      object-fit: cover;
-      border: 3px solid var(--accent);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    }
-    
-    .hero-text {
-      text-align: left;
-    }
-    
-    .hero-badge {
-      display: inline-block;
-      background: rgba(74, 144, 226, 0.15);
-      color: var(--accent-light);
-      padding: 0.5rem 1.5rem;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      margin-bottom: 1.5rem;
-      border: 1px solid rgba(74, 144, 226, 0.3);
-    }
-    
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, #e8eaf0 0%, #a0a8c0 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .hero .subtitle {
-      font-size: 1.3rem;
-      color: var(--accent-light);
-      margin-bottom: 1.5rem;
-      font-weight: 500;
-    }
-    
-    .hero .intro-text {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-      line-height: 1.8;
-      margin-bottom: 2rem;
-    }
-    
-    .cta-buttons {
-      display: flex;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-    
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-    
-    .stat-card {
-      background: var(--card-bg);
-      padding: 1.5rem;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      text-align: center;
-      transition: transform 0.3s;
-    }
-    
-    .stat-card:hover {
-      transform: translateY(-5px);
-    }
-    
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: 700;
-      background: var(--gradient-2);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 0.5rem;
-    }
-    
-    .stat-label {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-    
-    /* Section */
-    section {
-      padding: 4rem 0;
-    }
-    
-    .section-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    
-    .section-header h2 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-    
-    .section-header p {
-      color: var(--text-muted);
-      font-size: 1.1rem;
-    }
-    
-    /* Projects Grid */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    
-    .project-card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-      position: relative;
-    }
-    
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(74, 144, 226, 0.2);
-    }
-    
-    .project-header {
-      padding: 1.5rem;
-      background: var(--gradient-2);
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .project-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-    
-    .project-status {
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      background: var(--success);
-    }
-    
-    .project-body {
-      padding: 1.5rem;
-    }
-    
-    .project-desc {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-      line-height: 1.5;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    
-    .project-meta {
-      display: flex;
-      gap: 1.5rem;
-      margin-bottom: 1rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-    
-    .project-meta i {
-      color: var(--accent);
-      margin-right: 0.3rem;
-    }
-    
-    .project-tech {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-    
-    .tech-tag {
-      background: rgba(74, 144, 226, 0.15);
-      color: var(--accent-light);
-      padding: 0.3rem 0.8rem;
-      border-radius: 15px;
-      font-size: 0.75rem;
-      border: 1px solid rgba(74, 144, 226, 0.3);
-    }
-    
-    .project-links {
-      display: flex;
-      gap: 1rem;
-    }
-    
-    .btn {
-      padding: 0.6rem 1.2rem;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.9rem;
-      border: none;
-      cursor: pointer;
-    }
-    
-    .btn-primary {
-      background: var(--gradient-2);
-      color: white;
-    }
-    
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
-    }
-    
-    .btn-outline {
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      background: transparent;
-    }
-    
-    .btn-outline:hover {
-      background: rgba(74, 144, 226, 0.1);
-    }
-    
-    /* Loading */
-    .loading {
-      text-align: center;
-      padding: 3rem;
-      color: var(--text-muted);
-    }
-    
-    .spinner {
-      border: 3px solid var(--border);
-      border-top: 3px solid var(--accent);
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 1rem;
-    }
-    
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    
-    /* Filter */
-    .filter-bar {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-    
-    .filter-btn {
-      padding: 0.6rem 1.5rem;
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-      color: var(--text);
-      border-radius: 25px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-size: 0.9rem;
-    }
-    
-    .filter-btn:hover,
-    .filter-btn.active {
-      background: var(--gradient-2);
-      color: white;
-      border-color: var(--accent);
-    }
-    
-    /* Footer */
-    footer {
-      background: var(--secondary);
-      padding: 3rem 0 1.5rem;
-      margin-top: 4rem;
-      border-top: 1px solid var(--border);
-    }
-    
-    .footer-content {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 3rem;
-      margin-bottom: 2rem;
-    }
-    
-    .footer-about h3 {
-      margin-bottom: 1rem;
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .footer-about p {
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
-    
-    .social-links {
-      display: flex;
-      gap: 1rem;
-    }
-    
-    .social-link {
-      width: 40px;
-      height: 40px;
-      background: var(--card-bg);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text);
-      text-decoration: none;
-      transition: all 0.3s;
-      border: 1px solid var(--border);
-    }
-    
-    .social-link:hover {
-      background: var(--gradient-2);
-      transform: translateY(-3px);
-    }
-    
-    .footer-links h4 {
-      margin-bottom: 1rem;
-      color: var(--text);
-    }
-    
-    .footer-links ul {
-      list-style: none;
-    }
-    
-    .footer-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      display: block;
-      margin-bottom: 0.5rem;
-      transition: color 0.3s;
-    }
-    
-    .footer-links a:hover {
-      color: var(--accent-light);
-    }
-    
-    .copyright {
-      text-align: center;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-    
-    /* Responsive */
-    @media (max-width: 992px) {
-      .hero-main { 
-        grid-template-columns: 1fr; 
-        text-align: center;
-      }
-      .hero-text { text-align: center; }
-      .profile-image-container { margin: 0 auto; }
-      .cta-buttons { justify-content: center; }
-      .hero h1 { font-size: 2.5rem; }
-      .hero-stats { grid-template-columns: repeat(2, 1fr); }
-      .projects-grid { grid-template-columns: 1fr; }
-      .footer-content { grid-template-columns: 1fr; }
-    }
-    
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hero h1 { font-size: 2rem; }
-      .section-header h2 { font-size: 2rem; }
-      .profile-image { width: 250px; height: 250px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mangesh Bhattacharya | AI Security Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#030711;--surface:#0a0f1e;--surface2:#0d1530;--accent:#00d4ff;--accent2:#7c3aed;--accent3:#10b981;--text:#e2e8f0;--muted:#64748b;--glow:0 0 20px rgba(0,212,255,0.3);--glow2:0 0 20px rgba(124,58,237,0.3);}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+::selection{background:rgba(0,212,255,0.3);}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(3,7,17,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,212,255,0.1);}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px;}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.9rem;font-weight:500;transition:all 0.3s;letter-spacing:0.5px;}
+.nav-links a:hover{color:var(--accent);}
+.nav-cta{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;padding:10px 24px;border-radius:8px;font-weight:600;font-size:0.9rem;cursor:pointer;transition:all 0.3s;text-decoration:none;}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:var(--glow);}
+#hero{position:relative;height:100vh;display:flex;align-items:center;overflow:hidden;}
+#canvas3d{position:absolute;inset:0;z-index:0;}
+.hero-content{position:relative;z-index:10;max-width:700px;padding:0 60px;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.2);border-radius:50px;padding:8px 20px;font-size:0.8rem;color:var(--accent);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px;}
+.hero-badge::before{content:'';width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(1.5);}}
+.hero-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:800;line-height:1.05;margin-bottom:20px;letter-spacing:-2px;}
+.hero-title .name{background:linear-gradient(135deg,#fff 0%,var(--accent) 50%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-role{font-size:clamp(1rem,2.5vw,1.4rem);color:var(--muted);margin-bottom:32px;font-weight:400;line-height:1.6;}
+.hero-role span{color:var(--accent);font-weight:600;}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:14px 32px;border-radius:12px;text-decoration:none;font-weight:700;font-size:1rem;transition:all 0.3s;display:inline-flex;align-items:center;gap:10px;}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(0,212,255,0.3);}
+.btn-outline{border:2px solid rgba(0,212,255,0.4);color:var(--accent);padding:14px 32px;border-radius:12px;text-decoration:none;font-weight:600;font-size:1rem;transition:all 0.3s;display:inline-flex;align-items:center;gap:10px;background:transparent;}
+.btn-outline:hover{background:rgba(0,212,255,0.1);border-color:var(--accent);transform:translateY(-3px);}
+.hero-stats{position:absolute;bottom:60px;left:60px;z-index:10;display:flex;gap:48px;}
+.stat-num{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.stat-label{font-size:0.75rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+.scroll-indicator{position:absolute;bottom:30px;right:60px;z-index:10;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:0.75rem;letter-spacing:1px;}
+.scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollLine 2s infinite;}
+@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform:scaleY(1);transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+section{padding:100px 60px;}
+.section-tag{display:inline-block;background:rgba(0,212,255,0.1);color:var(--accent);font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:50px;margin-bottom:16px;border:1px solid rgba(0,212,255,0.2);}
+.section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:16px;}
+.section-subtitle{color:var(--muted);font-size:1.1rem;max-width:600px;line-height:1.7;}
+.gradient-text{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+#about{background:var(--surface);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1200px;margin:60px auto 0;}
+.avatar-3d-wrapper{position:relative;width:320px;height:320px;}
+.avatar-ring{position:absolute;inset:-20px;border-radius:50%;border:2px solid transparent;background:linear-gradient(135deg,var(--accent),var(--accent2)) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;animation:spin 8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.avatar-inner{width:320px;height:320px;border-radius:50%;background:linear-gradient(135deg,var(--surface2),var(--accent2) 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;border:3px solid rgba(0,212,255,0.2);}
+.about-text h2{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;margin-bottom:20px;}
+.about-text p{color:var(--muted);line-height:1.8;margin-bottom:16px;font-size:1.05rem;}
+.about-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;}
+.tag{background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);color:#a78bfa;padding:6px 16px;border-radius:50px;font-size:0.8rem;font-weight:500;}
+#skills{background:var(--bg);}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:1200px;margin:60px auto 0;}
+.skill-card{background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:28px;transition:all 0.4s;cursor:default;position:relative;overflow:hidden;}
+.skill-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,0.05),transparent);opacity:0;transition:opacity 0.3s;}
+.skill-card:hover{transform:translateY(-8px);border-color:rgba(0,212,255,0.3);box-shadow:var(--glow);}
+.skill-card:hover::before{opacity:1;}
+.skill-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:16px;}
+.skill-card h3{font-size:1.1rem;font-weight:700;margin-bottom:12px;}
+.skill-list{display:flex;flex-wrap:wrap;gap:8px;}
+.skill-item{background:rgba(255,255,255,0.05);padding:4px 12px;border-radius:50px;font-size:0.75rem;color:var(--muted);border:1px solid rgba(255,255,255,0.08);}
+#projects{background:var(--surface);}
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;max-width:1200px;margin:24px auto 0;}
+.filter-btn{background:transparent;border:1px solid rgba(255,255,255,0.1);color:var(--muted);padding:8px 20px;border-radius:50px;cursor:pointer;font-size:0.85rem;font-weight:500;transition:all 0.3s;}
+.filter-btn.active,.filter-btn:hover{background:rgba(0,212,255,0.1);border-color:var(--accent);color:var(--accent);}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;max-width:1200px;margin:32px auto 0;}
+.project-card{background:var(--surface2);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:28px;transition:all 0.4s;position:relative;overflow:hidden;display:flex;flex-direction:column;}
+.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(135deg,var(--accent),var(--accent2));}
+.project-card:hover{transform:translateY(-8px);border-color:rgba(0,212,255,0.25);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+.project-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
+.project-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(0,212,255,0.2),rgba(124,58,237,0.2));display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.project-title{font-size:1.05rem;font-weight:700;margin-bottom:10px;line-height:1.3;}
+.project-desc{color:var(--muted);font-size:0.875rem;line-height:1.7;flex:1;margin-bottom:20px;}
+.project-tech{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.tech-badge{background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.15);color:var(--accent);padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;}
+.project-links{display:flex;gap:10px;margin-top:auto;}
+.project-link{flex:1;text-align:center;padding:10px;border-radius:10px;font-size:0.8rem;font-weight:600;text-decoration:none;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:6px;}
+.project-link.github{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text);}
+.project-link.github:hover{background:rgba(255,255,255,0.1);}
+.project-link.demo{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;}
+.projects-loader{text-align:center;padding:60px;color:var(--muted);}
+#experience{background:var(--bg);}
+.timeline{max-width:800px;margin:60px auto 0;position:relative;}
+.timeline::before{content:'';position:absolute;left:24px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),var(--accent2),transparent);}
+.timeline-item{display:flex;gap:32px;margin-bottom:48px;position:relative;}
+.timeline-dot{width:48px;height:48px;min-width:48px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:1.2rem;position:relative;z-index:1;box-shadow:var(--glow);}
+.timeline-content{background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px 28px;flex:1;transition:all 0.3s;}
+.timeline-content:hover{border-color:rgba(0,212,255,0.2);box-shadow:var(--glow);}
+.timeline-date{font-size:0.75rem;color:var(--accent);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+.timeline-title{font-size:1.1rem;font-weight:700;margin-bottom:4px;}
+.timeline-company{color:var(--muted);font-size:0.9rem;margin-bottom:12px;}
+.timeline-desc{color:var(--muted);font-size:0.875rem;line-height:1.7;}
+#certifications{background:var(--surface);}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;max-width:1200px;margin:60px auto 0;}
+.cert-card{background:var(--bg);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;text-align:center;transition:all 0.3s;position:relative;overflow:hidden;}
+.cert-card:hover{transform:translateY(-5px);border-color:rgba(0,212,255,0.25);box-shadow:var(--glow);}
+.cert-icon{font-size:2rem;margin-bottom:12px;}
+.cert-name{font-size:0.85rem;font-weight:700;margin-bottom:6px;line-height:1.3;}
+.cert-org{font-size:0.75rem;color:var(--accent);font-weight:600;}
+#contact{background:var(--bg);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:1200px;margin:60px auto 0;align-items:start;}
+.contact-info h3{font-size:1.8rem;font-weight:700;margin-bottom:16px;}
+.contact-info p{color:var(--muted);line-height:1.8;margin-bottom:32px;}
+.contact-links{display:flex;flex-direction:column;gap:16px;}
+.contact-link{display:flex;align-items:center;gap:16px;padding:16px 20px;background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;text-decoration:none;color:var(--text);transition:all 0.3s;}
+.contact-link:hover{border-color:var(--accent);background:rgba(0,212,255,0.05);transform:translateX(8px);}
+.contact-link-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(0,212,255,0.2),rgba(124,58,237,0.2));display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--accent);}
+.contact-link-text strong{display:block;font-weight:700;font-size:0.95rem;}
+.contact-link-text span{color:var(--muted);font-size:0.8rem;}
+footer{background:var(--surface);border-top:1px solid rgba(255,255,255,0.06);padding:40px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+.footer-left{color:var(--muted);font-size:0.85rem;}
+.footer-right{display:flex;gap:16px;}
+.footer-social{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:all 0.3s;}
+.footer-social:hover{background:rgba(0,212,255,0.1);color:var(--accent);border-color:var(--accent);}
+.ai-fab{position:fixed;bottom:32px;right:32px;z-index:9999;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 8px 32px rgba(0,212,255,0.4);transition:all 0.3s;animation:fabFloat 3s ease-in-out infinite;}
+@keyframes fabFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+.ai-fab:hover{transform:scale(1.1)!important;box-shadow:0 12px 40px rgba(0,212,255,0.6);}
+.pulse-ring{position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(0,212,255,0.4);animation:fabPulse 2s infinite;}
+@keyframes fabPulse{0%{transform:scale(1);opacity:1;}100%{transform:scale(1.5);opacity:0;}}
+.ai-chat-panel{position:fixed;bottom:110px;right:32px;z-index:9999;width:420px;max-height:600px;background:var(--surface);border:1px solid rgba(0,212,255,0.2);border-radius:24px;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.6),var(--glow);transform:scale(0.9) translateY(20px);opacity:0;pointer-events:none;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);}
+.ai-chat-panel.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all;}
+.chat-header{padding:20px 24px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:14px;}
+.chat-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:1.2rem;position:relative;}
+.chat-status{position:absolute;bottom:1px;right:1px;width:12px;height:12px;background:#10b981;border-radius:50%;border:2px solid var(--surface);}
+.chat-header-info strong{display:block;font-size:1rem;font-weight:700;}
+.chat-header-info span{font-size:0.75rem;color:var(--accent);font-weight:500;}
+.chat-close{margin-left:auto;background:rgba(255,255,255,0.05);border:none;color:var(--muted);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:1rem;transition:all 0.2s;}
+.chat-close:hover{background:rgba(255,255,255,0.1);color:var(--text);}
+.chat-messages{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px;max-height:380px;}
+.chat-messages::-webkit-scrollbar{width:4px;}
+.chat-messages::-webkit-scrollbar-thumb{background:rgba(0,212,255,0.3);border-radius:2px;}
+.msg{display:flex;gap:10px;max-width:85%;}
+.msg.user{align-self:flex-end;flex-direction:row-reverse;}
+.msg-bubble{padding:12px 16px;border-radius:16px;font-size:0.875rem;line-height:1.6;}
+.msg.ai .msg-bubble{background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.15);color:var(--text);border-radius:4px 16px 16px 16px;}
+.msg.user .msg-bubble{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-radius:16px 4px 16px 16px;}
+.msg-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;}
+.msg.ai .msg-avatar{background:linear-gradient(135deg,var(--accent),var(--accent2));}
+.msg.user .msg-avatar{background:rgba(124,58,237,0.3);}
+.chat-suggestions{padding:0 16px 12px;display:flex;flex-wrap:wrap;gap:8px;}
+.suggest-btn{background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.15);color:var(--accent);padding:6px 14px;border-radius:50px;font-size:0.75rem;cursor:pointer;transition:all 0.2s;}
+.suggest-btn:hover{background:rgba(0,212,255,0.15);}
+.chat-input-area{padding:16px;border-top:1px solid rgba(255,255,255,0.06);display:flex;gap:10px;}
+.chat-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;color:var(--text);font-size:0.875rem;font-family:'Inter',sans-serif;outline:none;transition:all 0.3s;}
+.chat-input:focus{border-color:var(--accent);background:rgba(0,212,255,0.05);}
+.chat-send{background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;width:44px;height:44px;border-radius:12px;cursor:pointer;font-size:1rem;transition:all 0.3s;display:flex;align-items:center;justify-content:center;}
+.chat-send:hover{transform:scale(1.05);box-shadow:var(--glow);}
+.typing-indicator{display:flex;gap:4px;padding:12px 16px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.15);border-radius:4px 16px 16px 16px;width:fit-content;}
+.typing-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:typingDot 1.2s infinite;}
+.typing-dot:nth-child(2){animation-delay:0.2s;}
+.typing-dot:nth-child(3){animation-delay:0.4s;}
+@keyframes typingDot{0%,80%,100%{transform:translateY(0);}40%{transform:translateY(-6px);}}
+#loader{position:fixed;inset:0;z-index:99999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.5s;}
+#loader.hidden{opacity:0;pointer-events:none;}
+.loader-logo{font-family:'Space Grotesk',sans-serif;font-size:3rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:24px;letter-spacing:-2px;}
+.loader-bar{width:200px;height:3px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;}
+.loader-progress{height:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:2px;animation:loadProgress 2s ease forwards;}
+@keyframes loadProgress{from{width:0;}to{width:100%;}}
+.loader-text{margin-top:16px;font-size:0.8rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
+@media(max-width:768px){nav{padding:14px 20px;}.nav-links{display:none;}#hero .hero-content{padding:0 24px;}.hero-stats{left:24px;bottom:40px;gap:24px;}section{padding:60px 24px;}.about-grid,.contact-grid{grid-template-columns:1fr;gap:40px;}.ai-chat-panel{width:calc(100vw - 40px);right:20px;}footer{flex-direction:column;text-align:center;padding:32px 24px;}}
+@media(max-width:480px){.projects-grid{grid-template-columns:1fr;}.certs-grid{grid-template-columns:repeat(2,1fr);}}
+</style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <nav>
-        <div class="logo">Mangesh Bhattacharya</div>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="https://www.linkedin.com/in/mangesh-bhattacharya/" target="_blank">LinkedIn</a></li>
-          <li><a href="https://github.com/Mangesh-Bhattacharya" target="_blank">GitHub</a></li>
-          <li>
-            <div class="theme-switcher">
-              <button class="theme-btn theme-blue active" onclick="setTheme('blue')" title="Blue Theme"></button>
-              <button class="theme-btn theme-purple" onclick="setTheme('purple')" title="Purple Theme"></button>
-              <button class="theme-btn theme-green" onclick="setTheme('green')" title="Green Theme"></button>
-              <button class="theme-btn theme-orange" onclick="setTheme('orange')" title="Orange Theme"></button>
-            </div>
-          </li>
-        </ul>
-      </nav>
+<div id="loader"><div class="loader-logo">MB</div><div class="loader-bar"><div class="loader-progress"></div></div><div class="loader-text">Initializing AI Security Portfolio...</div></div>
+<nav>
+  <div class="nav-logo">Mangesh.B</div>
+  <ul class="nav-links"><li><a href="#about">About</a></li><li><a href="#skills">Skills</a></li><li><a href="#projects">Projects</a></li><li><a href="#experience">Experience</a></li><li><a href="#certifications">Certs</a></li><li><a href="#contact">Contact</a></li></ul>
+  <a href="https://www.linkedin.com/in/mangesh-bhattacharya" target="_blank" class="nav-cta"><i class="fab fa-linkedin"></i> Let's Connect</a>
+</nav>
+<section id="hero">
+  <canvas id="canvas3d"></canvas>
+  <div class="hero-content">
+    <div class="hero-badge"><span>Available for Opportunities</span></div>
+    <h1 class="hero-title">Hi, I'm <br><span class="name">Mangesh Bhattacharya</span></h1>
+    <p class="hero-role"><span>AI Security Engineer</span> · Cybersecurity Researcher<br>Threat Intelligence Analyst · Cloud Security Specialist</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary"><i class="fas fa-rocket"></i> Explore Projects</a>
+      <a href="https://www.linkedin.com/in/mangesh-bhattacharya" target="_blank" class="btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
     </div>
-  </header>
-
-  <section class="hero" id="about">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-main">
-          <div class="profile-image-container">
-            <img src="https://media.licdn.com/dms/image/v2/D4D03AQHGMQkmqU656Q/profile-displayphoto-shrink_400_400/B4DZVjsmLTG4Ag-/0/1741134390231?e=1767225600&v=beta&t=8g4v7YocJ5Y_EAH-LscmqtNKbTaDusZ1UbgsQ-rSPFE" 
-                 alt="Mangesh Bhattacharya" 
-                 class="profile-image"
-                 onerror="this.src='https://via.placeholder.com/300x300/4a90e2/ffffff?text=MB'">
-          </div>
-          
-          <div class="hero-text">
-            <span class="hero-badge">Master's in IT Security | AI Specialization</span>
-            <h1>Mangesh Bhattacharya</h1>
-            <p class="subtitle">Cybersecurity Researcher | Threat Intelligence Analyst | AI Security Engineer</p>
-            
-            <p class="intro-text">
-              I am a graduate student at the University of Ontario Institute of Technology, pursuing a Master's degree in Information Technology Security with a specialization in Artificial Intelligence. My research focuses on developing intelligent security solutions that combine advanced threat detection, machine learning algorithms, and cloud-based architectures to address modern cybersecurity challenges.
-            </p>
-            
-            <p class="intro-text">
-              With expertise spanning network security, penetration testing, and AI-powered analytics, I design and implement innovative systems that enhance organizational security posture. My work bridges theoretical research and practical application, creating tools that detect anomalies, automate threat intelligence workflows, and strengthen defense mechanisms against evolving cyber threats.
-            </p>
-            
-            <div class="cta-buttons">
-              <a href="#projects" class="btn btn-primary">
-                <i class="fas fa-code"></i> View Projects
-              </a>
-              <a href="https://www.linkedin.com/in/mangesh-bhattacharya/" target="_blank" class="btn btn-outline">
-                <i class="fab fa-linkedin"></i> Connect on LinkedIn
-              </a>
-            </div>
-          </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num" id="statProjects">30+</div><div class="stat-label">Projects</div></div>
+    <div class="stat"><div class="stat-num" id="statStars">12</div><div class="stat-label">GitHub Stars</div></div>
+    <div class="stat"><div class="stat-num">15+</div><div class="stat-label">Certifications</div></div>
+    <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Years Exp</div></div>
+  </div>
+  <div class="scroll-indicator"><div class="scroll-line"></div><span>SCROLL</span></div>
+</section>
+<section id="about">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-tag">About Me</div>
+    <h2 class="section-title">Securing the <span class="gradient-text">AI-Driven Future</span></h2>
+    <div class="about-grid">
+      <div style="display:flex;justify-content:center;">
+        <div class="avatar-3d-wrapper">
+          <div class="avatar-ring"></div>
+          <div class="avatar-inner"><canvas id="avatarCanvas" width="320" height="320"></canvas></div>
         </div>
-        
-        <div class="hero-stats">
-          <div class="stat-card">
-            <div class="stat-number" id="totalProjects">0</div>
-            <div class="stat-label">Completed Projects</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number" id="totalStars">0</div>
-            <div class="stat-label">GitHub Stars</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number" id="languages">0</div>
-            <div class="stat-label">Technologies</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">15+</div>
-            <div class="stat-label">Certifications</div>
-          </div>
+      </div>
+      <div class="about-text">
+        <h2>Master's in IT Security<br><span class="gradient-text">AI Specialization</span></h2>
+        <p>Graduate student at the <strong>University of Ontario Institute of Technology</strong>, pursuing a Master's in Information Technology Security with a specialization in Artificial Intelligence.</p>
+        <p>My research focuses on developing <strong>intelligent security solutions</strong> that combine advanced threat detection, machine learning algorithms, and cloud-based architectures to address modern cybersecurity challenges.</p>
+        <p>Currently working at <strong>SentinelSync Inc.</strong> in Toronto, ON, bridging theoretical research and practical application to create tools that detect anomalies, automate threat intelligence workflows, and strengthen defense mechanisms.</p>
+        <div class="about-tags">
+          <span class="tag">🎓 Ontario Tech University</span><span class="tag">🏢 SentinelSync Inc.</span><span class="tag">📍 Toronto, ON</span><span class="tag">🔬 AI Security Research</span><span class="tag">☁️ Cloud Security</span><span class="tag">🛡️ Threat Intelligence</span>
         </div>
       </div>
     </div>
-  </section>
-
-  <section id="projects">
-    <div class="container">
-      <div class="section-header">
-        <h2>Research & Development Projects</h2>
-        <p>Completed projects showcasing expertise in cybersecurity, AI, and cloud technologies</p>
+  </div>
+</section>
+<section id="skills">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-tag">Expertise</div>
+    <h2 class="section-title">Technical <span class="gradient-text">Skills</span></h2>
+    <p class="section-subtitle">Specialized in AI-powered security solutions, threat intelligence, and cloud security architecture.</p>
+    <div class="skills-grid">
+      <div class="skill-card"><div class="skill-icon" style="background:rgba(0,212,255,0.15);">🛡️</div><h3>Cybersecurity</h3><div class="skill-list"><span class="skill-item">Penetration Testing</span><span class="skill-item">Threat Intelligence</span><span class="skill-item">SIEM/SOAR</span><span class="skill-item">Red Teaming</span><span class="skill-item">Vulnerability Assessment</span><span class="skill-item">Incident Response</span><span class="skill-item">Malware Analysis</span></div></div>
+      <div class="skill-card"><div class="skill-icon" style="background:rgba(124,58,237,0.15);">🤖</div><h3>AI & Machine Learning</h3><div class="skill-list"><span class="skill-item">Python (ML)</span><span class="skill-item">TensorFlow</span><span class="skill-item">Scikit-learn</span><span class="skill-item">NLP</span><span class="skill-item">Anomaly Detection</span><span class="skill-item">Neural Networks</span><span class="skill-item">LLM Integration</span></div></div>
+      <div class="skill-card"><div class="skill-icon" style="background:rgba(16,185,129,0.15);">☁️</div><h3>Cloud & DevSecOps</h3><div class="skill-list"><span class="skill-item">AWS</span><span class="skill-item">Docker</span><span class="skill-item">Ansible</span><span class="skill-item">Kubernetes</span><span class="skill-item">Trivy</span><span class="skill-item">OpenSearch</span><span class="skill-item">ELK Stack</span></div></div>
+      <div class="skill-card"><div class="skill-icon" style="background:rgba(245,158,11,0.15);">🔍</div><h3>Security Tools</h3><div class="skill-list"><span class="skill-item">Nmap</span><span class="skill-item">Wireshark</span><span class="skill-item">Metasploit</span><span class="skill-item">Wazuh</span><span class="skill-item">VirusTotal API</span><span class="skill-item">ThreatFox</span><span class="skill-item">Nuclei</span></div></div>
+      <div class="skill-card"><div class="skill-icon" style="background:rgba(239,68,68,0.15);">💻</div><h3>Development</h3><div class="skill-list"><span class="skill-item">Python</span><span class="skill-item">JavaScript</span><span class="skill-item">TypeScript</span><span class="skill-item">Streamlit</span><span class="skill-item">ASP.NET</span><span class="skill-item">Shell/Bash</span><span class="skill-item">SQL</span></div></div>
+      <div class="skill-card"><div class="skill-icon" style="background:rgba(20,184,166,0.15);">🌐</div><h3>Network Security</h3><div class="skill-list"><span class="skill-item">Cisco Networking</span><span class="skill-item">Firewall Config</span><span class="skill-item">IDS/IPS</span><span class="skill-item">VPN</span><span class="skill-item">Network Forensics</span><span class="skill-item">Protocol Analysis</span></div></div>
+    </div>
+  </div>
+</section>
+<section id="projects">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-tag">Portfolio</div>
+    <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+    <p class="section-subtitle">Real-time projects from GitHub — AI-powered security tools, threat detection systems, and cloud security solutions.</p>
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
+      <button class="filter-btn" data-filter="ai">AI & ML</button>
+      <button class="filter-btn" data-filter="security">Security</button>
+      <button class="filter-btn" data-filter="cloud">Cloud</button>
+      <button class="filter-btn" data-filter="network">Network</button>
+    </div>
+    <div class="projects-grid" id="projectsGrid"><div class="projects-loader"><i class="fas fa-circle-notch fa-spin" style="font-size:2rem;color:var(--accent);"></i><p style="margin-top:16px;">Loading projects from GitHub...</p></div></div>
+    <div style="text-align:center;margin-top:40px;"><a href="https://github.com/Mangesh-Bhattacharya" target="_blank" class="btn-outline"><i class="fab fa-github"></i> View All 81+ Repositories</a></div>
+  </div>
+</section>
+<section id="experience">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-tag">Journey</div>
+    <h2 class="section-title">Experience & <span class="gradient-text">Education</span></h2>
+    <div class="timeline">
+      <div class="timeline-item"><div class="timeline-dot">🏢</div><div class="timeline-content"><div class="timeline-date">2024 – Present</div><div class="timeline-title">AI Security Engineer</div><div class="timeline-company">SentinelSync Inc. · Toronto, ON</div><div class="timeline-desc">Developing AI-powered security solutions for automated threat detection, vulnerability scanning, and incident response. Building ML pipelines for anomaly detection and threat intelligence automation.</div></div></div>
+      <div class="timeline-item"><div class="timeline-dot">🎓</div><div class="timeline-content"><div class="timeline-date">2023 – Present</div><div class="timeline-title">Master's in IT Security (AI Specialization)</div><div class="timeline-company">University of Ontario Institute of Technology · Oshawa, ON</div><div class="timeline-desc">Specializing in AI-driven security solutions, machine learning for threat detection, and cloud security architecture. Research focused on intelligent systems bridging academic research with real-world application.</div></div></div>
+      <div class="timeline-item"><div class="timeline-dot">🔬</div><div class="timeline-content"><div class="timeline-date">2023 – 2024</div><div class="timeline-title">Cybersecurity Researcher & Analyst</div><div class="timeline-company">CANARIE · AWS Cloud Security Project</div><div class="timeline-desc">Led the AI-Powered DAIR BoosterPack project — securing AWS Amazon-Linux environments using Docker, Ansible, and Trivy for automated vulnerability scanning. Integrated OpenSearch for real-time threat visualization.</div></div></div>
+      <div class="timeline-item"><div class="timeline-dot">📚</div><div class="timeline-content"><div class="timeline-date">2019 – 2022</div><div class="timeline-title">Diploma in IT & Cybersecurity</div><div class="timeline-company">Seneca Polytechnic & Humber Polytechnic · Toronto, ON</div><div class="timeline-desc">Built foundational expertise in network security, system administration, and cybersecurity fundamentals. Developed early security tools and contributed to open-source cybersecurity education projects.</div></div></div>
+    </div>
+  </div>
+</section>
+<section id="certifications">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-tag">Achievements</div>
+    <h2 class="section-title">Certifications & <span class="gradient-text">Badges</span></h2>
+    <p class="section-subtitle">15+ professional certifications spanning AI security, cloud platforms, and cybersecurity domains.</p>
+    <div class="certs-grid">
+      <div class="cert-card"><div class="cert-icon">🔒</div><div class="cert-name">CompTIA Security+</div><div class="cert-org">CompTIA</div></div>
+      <div class="cert-card"><div class="cert-icon">☁️</div><div class="cert-name">AWS Security Specialty</div><div class="cert-org">Amazon Web Services</div></div>
+      <div class="cert-card"><div class="cert-icon">🎯</div><div class="cert-name">TryHackMe Top %</div><div class="cert-org">TryHackMe · @TheOrbiter</div></div>
+      <div class="cert-card"><div class="cert-icon">🛡️</div><div class="cert-name">Certified Ethical Hacker</div><div class="cert-org">EC-Council</div></div>
+      <div class="cert-card"><div class="cert-icon">🤖</div><div class="cert-name">AI Security Practitioner</div><div class="cert-org">AI Security Institute</div></div>
+      <div class="cert-card"><div class="cert-icon">🐍</div><div class="cert-name">Python for Security</div><div class="cert-org">Coursera / Google</div></div>
+      <div class="cert-card"><div class="cert-icon">🌐</div><div class="cert-name">Network Security</div><div class="cert-org">Cisco Networking Academy</div></div>
+      <div class="cert-card"><div class="cert-icon">🔍</div><div class="cert-name">Threat Intelligence</div><div class="cert-org">SANS Institute</div></div>
+      <div class="cert-card"><div class="cert-icon">⚡</div><div class="cert-name">Cloud Security Alliance</div><div class="cert-org">CSA CCSK</div></div>
+      <div class="cert-card"><div class="cert-icon">🔧</div><div class="cert-name">Penetration Testing</div><div class="cert-org">Offensive Security</div></div>
+      <div class="cert-card"><div class="cert-icon">📊</div><div class="cert-name">ML for Cybersecurity</div><div class="cert-org">Coursera</div></div>
+      <div class="cert-card"><div class="cert-icon">🏆</div><div class="cert-name">CTF Champion</div><div class="cert-org">Multiple Competitions</div></div>
+    </div>
+  </div>
+</section>
+<section id="contact">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-tag">Let's Talk</div>
+    <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Open to <span class="gradient-text">New Opportunities</span></h3>
+        <p>Looking for roles in AI Security Engineering, Cybersecurity Research, Threat Intelligence, or Cloud Security. Let's build the future of secure AI systems together.</p>
+        <div class="contact-links">
+          <a href="https://www.linkedin.com/in/mangesh-bhattacharya" target="_blank" class="contact-link"><div class="contact-link-icon"><i class="fab fa-linkedin"></i></div><div class="contact-link-text"><strong>LinkedIn</strong><span>linkedin.com/in/mangesh-bhattacharya</span></div></a>
+          <a href="https://github.com/Mangesh-Bhattacharya" target="_blank" class="contact-link"><div class="contact-link-icon"><i class="fab fa-github"></i></div><div class="contact-link-text"><strong>GitHub</strong><span>github.com/Mangesh-Bhattacharya</span></div></a>
+          <a href="https://tryhackme.com/p/TheOrbiter" target="_blank" class="contact-link"><div class="contact-link-icon">🎯</div><div class="contact-link-text"><strong>TryHackMe</strong><span>@TheOrbiter</span></div></a>
+        </div>
       </div>
-      
-      <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">All Projects</button>
-        <button class="filter-btn" data-filter="ai">AI & ML</button>
-        <button class="filter-btn" data-filter="security">Security</button>
-        <button class="filter-btn" data-filter="cloud">Cloud</button>
-        <button class="filter-btn" data-filter="network">Network</button>
-      </div>
-      
-      <div id="projectsContainer">
-        <div class="loading">
-          <div class="spinner"></div>
-          <p>Loading completed projects from GitHub...</p>
+      <div>
+        <div style="background:var(--surface);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:32px;">
+          <h3 style="margin-bottom:20px;font-size:1.2rem;font-weight:700;">Ask the <span class="gradient-text">AI Assistant</span></h3>
+          <p style="color:var(--muted);font-size:0.875rem;line-height:1.7;margin-bottom:24px;">Use the AI assistant (bottom-right corner 🤖) to ask about experience, projects, skills, or discuss a potential opportunity. Powered by real-time GitHub data!</p>
+          <div style="display:flex;align-items:center;gap:12px;padding:16px;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:12px;margin-bottom:24px;"><span style="font-size:1.5rem;">🤖</span><div><strong style="display:block;font-size:0.9rem;">AI Assistant Online</strong><span style="color:var(--accent);font-size:0.75rem;">Ask about projects, skills & availability</span></div></div>
+          <a href="https://www.linkedin.com/in/mangesh-bhattacharya" target="_blank" class="btn-primary" style="justify-content:center;width:100%;"><i class="fab fa-linkedin"></i> Connect on LinkedIn</a>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+<footer>
+  <div class="footer-left"><strong style="color:var(--accent);">Mangesh Bhattacharya</strong> · AI Security Engineer & Cybersecurity Researcher<br><span id="footerUpdate">© 2026 · Real-time updates from GitHub</span></div>
+  <div class="footer-right">
+    <a href="https://github.com/Mangesh-Bhattacharya" target="_blank" class="footer-social"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/mangesh-bhattacharya" target="_blank" class="footer-social"><i class="fab fa-linkedin"></i></a>
+    <a href="https://tryhackme.com/p/TheOrbiter" target="_blank" class="footer-social">🎯</a>
+  </div>
+</footer>
+<button class="ai-fab" onclick="toggleChat()" id="aiFab" title="Ask AI about Mangesh"><div class="pulse-ring"></div>🤖</button>
+<div class="ai-chat-panel" id="aiChatPanel">
+  <div class="chat-header">
+    <div class="chat-avatar">🤖<div class="chat-status"></div></div>
+    <div class="chat-header-info"><strong>Mangesh's AI Assistant</strong><span>Ask about projects, skills & opportunities</span></div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="msg ai"><div class="msg-avatar">🤖</div><div class="msg-bubble">Hi! I'm Mangesh's AI Assistant 👋 I have real-time knowledge about his GitHub projects, skills, and LinkedIn profile. Ask me anything about his experience, specific projects, or whether he'd be a great fit for your team!</div></div>
+  </div>
+  <div class="chat-suggestions" id="chatSuggestions">
+    <button class="suggest-btn" onclick="sendSuggestion('What are Mangesh\'s top projects?')">Top Projects</button>
+    <button class="suggest-btn" onclick="sendSuggestion('What skills does Mangesh have?')">Skills</button>
+    <button class="suggest-btn" onclick="sendSuggestion('Is Mangesh open to job opportunities?')">Open to Work?</button>
+    <button class="suggest-btn" onclick="sendSuggestion('Tell me about his AI security research')">AI Research</button>
+  </div>
+  <div class="chat-input-area">
+    <input type="text" class="chat-input" id="chatInput" placeholder="Ask about Mangesh..." onkeydown="if(event.key==='Enter')sendMessage()">
+    <button class="chat-send" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+<script>
+(function initThreeJS(){
+  const canvas=document.getElementById('canvas3d');
+  if(!canvas||typeof THREE==='undefined')return;
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,1000);
+  camera.position.set(0,0,30);
+  scene.add(new THREE.AmbientLight(0x0a0a2e,2));
+  const pl1=new THREE.PointLight(0x00d4ff,3,80);pl1.position.set(20,20,20);scene.add(pl1);
+  const pl2=new THREE.PointLight(0x7c3aed,2,80);pl2.position.set(-20,-10,10);scene.add(pl2);
+  const pl3=new THREE.PointLight(0x10b981,1.5,60);pl3.position.set(0,-20,5);scene.add(pl3);
+  const geos=[new THREE.IcosahedronGeometry(1.2,0),new THREE.OctahedronGeometry(1,0),new THREE.TetrahedronGeometry(1.2,0),new THREE.DodecahedronGeometry(1,0),new THREE.TorusGeometry(0.9,0.3,8,16),new THREE.ConeGeometry(0.8,1.6,5)];
+  const mats=[new THREE.MeshPhongMaterial({color:0x00d4ff,wireframe:true,transparent:true,opacity:0.6}),new THREE.MeshPhongMaterial({color:0x7c3aed,wireframe:true,transparent:true,opacity:0.5}),new THREE.MeshPhongMaterial({color:0x10b981,wireframe:true,transparent:true,opacity:0.55}),new THREE.MeshPhongMaterial({color:0x00d4ff,transparent:true,opacity:0.1})];
+  const objs=[];
+  for(let i=0;i<25;i++){
+    const mesh=new THREE.Mesh(geos[Math.floor(Math.random()*geos.length)],mats[Math.floor(Math.random()*mats.length)].clone());
+    mesh.position.set((Math.random()-.5)*35,(Math.random()-.5)*35,(Math.random()-.5)*20-10);
+    const s=0.3+Math.random()*1.2;mesh.scale.set(s,s,s);
+    mesh.userData={rotX:(Math.random()-.5)*.015,rotY:(Math.random()-.5)*.015,fs:0.3+Math.random()*.7,fo:Math.random()*Math.PI*2,oy:mesh.position.y};
+    scene.add(mesh);objs.push(mesh);
+  }
+  const pArr=new Float32Array(500*3);
+  for(let i=0;i<500;i++){pArr[i*3]=(Math.random()-.5)*120;pArr[i*3+1]=(Math.random()-.5)*120;pArr[i*3+2]=(Math.random()-.5)*80-20;}
+  const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pArr,3));
+  const pts=new THREE.Points(pg,new THREE.PointsMaterial({color:0x00d4ff,size:0.15,transparent:true,opacity:0.6}));
+  scene.add(pts);
+  const grid=new THREE.GridHelper(80,40,0x00d4ff,0x0a0f2e);grid.position.y=-15;grid.material.transparent=true;grid.material.opacity=0.15;scene.add(grid);
+  let mx=0,my=0;
+  document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-.5)*2;my=(e.clientY/window.innerHeight-.5)*2;});
+  let t=0;
+  function anim(){
+    requestAnimationFrame(anim);t+=0.01;
+    camera.position.x+=(mx*3-camera.position.x)*0.05;camera.position.y+=(-my*2-camera.position.y)*0.05;camera.lookAt(0,0,0);
+    objs.forEach(o=>{o.rotation.x+=o.userData.rotX;o.rotation.y+=o.userData.rotY;o.position.y=o.userData.oy+Math.sin(t*o.userData.fs+o.userData.fo)*1.5;});
+    pts.rotation.y=t*0.03;pts.rotation.x=t*0.01;
+    pl1.intensity=2.5+Math.sin(t*2)*.5;pl2.intensity=1.8+Math.cos(t*1.5)*.4;
+    renderer.render(scene,camera);
+  }
+  anim();
+  window.addEventListener('resize',()=>{renderer.setSize(window.innerWidth,window.innerHeight);camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();});
+})();
+(function initAvatar(){
+  const c=document.getElementById('avatarCanvas');if(!c)return;
+  const ctx=c.getContext('2d'),W=c.width,H=c.height;let a=0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const bg=ctx.createRadialGradient(W/2,H/2,20,W/2,H/2,160);bg.addColorStop(0,'rgba(10,15,30,0.8)');bg.addColorStop(1,'rgba(3,7,17,0.9)');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    ctx.save();ctx.translate(W/2,H/2);ctx.rotate(a*.5);
+    for(let i=0;i<12;i++){const ang=(i/12)*Math.PI*2;ctx.beginPath();ctx.arc(Math.cos(ang)*130,Math.sin(ang)*130,4,0,Math.PI*2);ctx.fillStyle=`rgba(0,212,255,${.3+Math.sin(a+i)*.3})`;ctx.fill();}
+    ctx.restore();
+    ctx.save();ctx.translate(W/2,H/2);ctx.rotate(Math.sin(a*.3)*.1);
+    ctx.beginPath();ctx.moveTo(0,-80);ctx.bezierCurveTo(70,-80,80,-30,80,10);ctx.bezierCurveTo(80,60,40,100,0,110);ctx.bezierCurveTo(-40,100,-80,60,-80,10);ctx.bezierCurveTo(-80,-30,-70,-80,0,-80);
+    const sg=ctx.createLinearGradient(-80,-80,80,110);sg.addColorStop(0,'rgba(0,212,255,0.25)');sg.addColorStop(.5,'rgba(124,58,237,0.2)');sg.addColorStop(1,'rgba(16,185,129,0.25)');
+    ctx.fillStyle=sg;ctx.fill();ctx.strokeStyle='rgba(0,212,255,0.7)';ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle='rgba(0,212,255,0.9)';ctx.font='bold 48px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🔐',0,10);ctx.restore();
+    ctx.save();ctx.translate(W/2,H/2);const sy=Math.sin(a*1.5)*60;const sg2=ctx.createLinearGradient(-100,sy,100,sy);sg2.addColorStop(0,'rgba(0,212,255,0)');sg2.addColorStop(.5,'rgba(0,212,255,0.5)');sg2.addColorStop(1,'rgba(0,212,255,0)');ctx.strokeStyle=sg2;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-100,sy);ctx.lineTo(100,sy);ctx.stroke();ctx.restore();
+    a+=0.025;requestAnimationFrame(draw);
+  }
+  draw();
+})();
+const GITHUB_USER='Mangesh-Bhattacharya';let allProjects=[];
+const ICONS={ai:'🤖',security:'🛡️',cloud:'☁️',network:'🌐',default:'💻'};
+const CATS={ai:['ai','ml','machine-learning','neural','intelligence','anomaly','detection','automated','llm','nlp'],security:['security','threat','vulnerability','ransomware','scan','recon','pentest','red-team','stealth','keylogger','malware'],cloud:['cloud','aws','azure','docker','kubernetes','canarie','ansible'],network:['network','cisco','topology','nmap','packet','firewall']};
+function getCat(p){const t=`${p.name} ${p.description} ${(p.topics||[]).join(' ')}`.toLowerCase();for(const[c,kws]of Object.entries(CATS))if(kws.some(k=>t.includes(k)))return c;return'default';}
+function fmtName(n){return n.replace(/[-_]/g,' ').replace(/\b\w/g,l=>l.toUpperCase());}
+async function loadProjects(){
+  try{
+    const r=await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&sort=stars`);
+    const repos=await r.json();
+    allProjects=repos.filter(r=>!r.fork).map(r=>({name:r.name,description:r.description||'Advanced cybersecurity and AI security project',url:r.html_url,language:r.language,stars:r.stargazers_count,homepage:r.homepage,topics:r.topics||[],updated:new Date(r.updated_at),cat:''}));
+    allProjects.forEach(p=>p.cat=getCat(p));
+    allProjects.sort((a,b)=>b.stars-a.stars||b.updated-a.updated);
+    document.getElementById('statProjects').textContent=allProjects.length+'+';
+    document.getElementById('statStars').textContent=allProjects.reduce((s,p)=>s+p.stars,0);
+    renderProjects(allProjects.slice(0,12));
+    document.getElementById('footerUpdate').textContent=`© 2026 · Last synced: ${new Date().toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}`;
+  }catch(e){document.getElementById('projectsGrid').innerHTML='<div class="projects-loader"><p style="color:#f87171">Could not load projects. <a href="https://github.com/Mangesh-Bhattacharya" style="color:var(--accent)" target="_blank">View on GitHub</a></p></div>';}
+}
+function renderProjects(projects){
+  const grid=document.getElementById('projectsGrid');
+  if(!projects.length){grid.innerHTML='<div class="projects-loader"><p>No projects found.</p></div>';return;}
+  grid.innerHTML=projects.map(p=>{const langs=[p.language,...(p.topics||[]).slice(0,3)].filter(Boolean);return`<div class="project-card"><div class="project-header"><div class="project-icon">${ICONS[p.cat]||'💻'}</div>${p.stars?`<div style="font-size:0.8rem;color:var(--muted);">⭐ ${p.stars}</div>`:''}</div><div class="project-title">${fmtName(p.name)}</div><div class="project-desc">${p.description}</div><div class="project-tech">${langs.map(l=>`<span class="tech-badge">${l}</span>`).join('')}</div><div class="project-links"><a href="${p.url}" target="_blank" class="project-link github"><i class="fab fa-github"></i> GitHub</a>${p.homepage?`<a href="${p.homepage}" target="_blank" class="project-link demo"><i class="fas fa-external-link-alt"></i> Demo</a>`:''}</div></div>`;}).join('');
+}
+document.getElementById('filterBar').addEventListener('click',e=>{const btn=e.target.closest('.filter-btn');if(!btn)return;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const f=btn.dataset.filter;renderProjects((f==='all'?allProjects:allProjects.filter(p=>p.cat===f)).slice(0,f==='all'?12:20));});
+loadProjects();setInterval(loadProjects,5*60*1000);
+const CTX={name:"Mangesh Bhattacharya",role:"AI Security Engineer & Cybersecurity Researcher",edu:"Master's in IT Security (AI Specialization) at Ontario Tech University",company:"SentinelSync Inc., Toronto ON",linkedin:"https://www.linkedin.com/in/mangesh-bhattacharya",github:"https://github.com/Mangesh-Bhattacharya",skills:["Python","Machine Learning","AI Security","Threat Intelligence","Penetration Testing","AWS","Docker","Ansible","SIEM/SOAR","Network Security","NLP","Anomaly Detection","TypeScript"],open:true};
+function ruleAnswer(q){const ql=q.toLowerCase();if(/hello|hi |hey/.test(ql))return"Hi there! 👋 I'm Mangesh's AI assistant. Ask me about his cybersecurity research, AI security projects, skills, or whether he'd be a great fit for your team!";if(/(open|available).*(work|job|hire|opportunit)|(job|hire|recruit|work).*(open|available|looking)/.test(ql))return"Yes! Mangesh is actively open to opportunities! 🚀 Looking for:
+• AI Security Engineering
+• Cybersecurity Research
+• Threat Intelligence Analysis
+• Cloud Security Architecture
 
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-about">
-          <h3>Mangesh Bhattacharya</h3>
-          <p>Master's student at the University of Ontario Institute of Technology, specializing in IT Security with AI focus. Passionate about developing intelligent security solutions and advancing cybersecurity research.</p>
-          <div class="social-links">
-            <a href="https://github.com/Mangesh-Bhattacharya" class="social-link" target="_blank">
-              <i class="fab fa-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/mangesh-bhattacharya/" class="social-link" target="_blank">
-              <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="https://tryhackme.com/p/TheOrbiter" class="social-link" target="_blank">
-              <i class="fas fa-shield-alt"></i>
-            </a>
-            <a href="mailto:mangesh.bhattacharya@ontariotechu.net" class="social-link">
-              <i class="fas fa-envelope"></i>
-            </a>
-          </div>
-        </div>
-        
-        <div class="footer-links">
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="https://www.linkedin.com/in/mangesh-bhattacharya/" target="_blank">LinkedIn</a></li>
-            <li><a href="https://github.com/Mangesh-Bhattacharya" target="_blank">GitHub Profile</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-links">
-          <h4>Education</h4>
-          <ul>
-            <li><a href="https://ontariotechu.ca/" target="_blank">Ontario Tech University</a></li>
-            <li><a href="https://www.senecapolytechnic.ca/" target="_blank">Seneca Polytechnic</a></li>
-            <li><a href="https://humber.ca/" target="_blank">Humber Polytechnic</a></li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="copyright">
-        <p>&copy; 2025 Mangesh Bhattacharya. All rights reserved. | Real-time updates from GitHub | Last updated: <span id="lastUpdate"></span></p>
-      </div>
-    </div>
-  </footer>
+Based in Toronto, ON. <a href='https://www.linkedin.com/in/mangesh-bhattacharya' target='_blank' style='color:var(--accent)'>Connect on LinkedIn →</a>";if(/skill|technolog|expert/.test(ql))return"Mangesh's expertise:
 
-  <script>
-    const GITHUB_USERNAME = 'Mangesh-Bhattacharya';
-    const GITHUB_API = `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`;
-    
-    // Category keywords for intelligent filtering
-    const CATEGORIES = {
-      ai: ['ai', 'ml', 'machine-learning', 'neural', 'deep-learning', 'intelligence', 'anomaly', 'detection', 'automated', 'analysis'],
-      security: ['security', 'threat', 'vulnerability', 'ransomware', 'scan', 'recon', 'pentest', 'red-team', 'stealth', 'detection'],
-      cloud: ['cloud', 'aws', 'azure', 'docker', 'kubernetes', 'canarie'],
-      network: ['network', 'cisco', 'topology', 'nmap', 'packet']
-    };
-    
-    let allProjects = [];
-    
-    // Theme Management
-    function setTheme(theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-      
-      document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelector(`.theme-${theme}`).classList.add('active');
-    }
-    
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme') || 'blue';
-    setTheme(savedTheme);
-    
-    async function fetchProjects() {
-      try {
-        const response = await fetch(GITHUB_API);
-        const repos = await response.json();
-        
-        // Filter: only non-forks AND completed projects (not updated in last 30 days)
-        allProjects = repos
-          .filter(repo => !repo.fork)
-          .map(repo => ({
-            name: repo.name,
-            description: repo.description || 'Advanced cybersecurity and AI research project',
-            url: repo.html_url,
-            language: repo.language || 'Unknown',
-            stars: repo.stargazers_count,
-            forks: repo.forks_count,
-            updated: new Date(repo.updated_at),
-            created: new Date(repo.created_at),
-            homepage: repo.homepage,
-            topics: repo.topics || [],
-            daysSinceUpdate: (new Date() - new Date(repo.updated_at)) / (1000 * 60 * 60 * 24)
-          }))
-          .filter(repo => repo.daysSinceUpdate >= 30) // Only completed projects
-          .sort((a, b) => b.updated - a.updated);
-        
-        updateStats();
-        displayProjects(allProjects);
-        updateLastUpdateTime();
-      } catch (error) {
-        document.getElementById('projectsContainer').innerHTML = `
-          <div class="loading">
-            <p style="color: #f39c12;">Error loading projects. Please refresh the page.</p>
-          </div>
-        `;
-      }
-    }
-    
-    function updateStats() {
-      const totalStars = allProjects.reduce((sum, p) => sum + p.stars, 0);
-      const languages = new Set(allProjects.map(p => p.language).filter(l => l !== 'Unknown'));
-      
-      document.getElementById('totalProjects').textContent = allProjects.length;
-      document.getElementById('totalStars').textContent = totalStars;
-      document.getElementById('languages').textContent = languages.size;
-    }
-    
-    function updateLastUpdateTime() {
-      const now = new Date();
-      const formatted = now.toLocaleString('en-US', { 
-        year: 'numeric', 
-        month: 'short', 
-        day: 'numeric', 
-        hour: '2-digit', 
-        minute: '2-digit' 
-      });
-      document.getElementById('lastUpdate').textContent = formatted;
-    }
-    
-    function categorizeProject(project) {
-      const text = `${project.name} ${project.description} ${project.topics.join(' ')}`.toLowerCase();
-      const categories = [];
-      
-      for (const [category, keywords] of Object.entries(CATEGORIES)) {
-        if (keywords.some(keyword => text.includes(keyword))) {
-          categories.push(category);
-        }
-      }
-      
-      return categories.length > 0 ? categories : ['other'];
-    }
-    
-    function displayProjects(projects) {
-      const container = document.getElementById('projectsContainer');
-      
-      if (projects.length === 0) {
-        container.innerHTML = '<div class="loading"><p>No completed projects found. Check back soon!</p></div>';
-        return;
-      }
-      
-      const html = `
-        <div class="projects-grid">
-          ${projects.map(project => {
-            const categories = categorizeProject(project);
-            const formattedDate = project.updated.toISOString().split('T')[0];
-            const formattedTime = project.updated.toTimeString().split(' ')[0];
-            
-            return `
-              <div class="project-card" data-categories="${categories.join(' ')}">
-                <div class="project-header">
-                  <div class="project-title">${formatProjectName(project.name)}</div>
-                  <div class="project-status">Completed</div>
-                </div>
-                <div class="project-body">
-                  <p class="project-desc">${project.description}</p>
-                  
-                  <div class="project-meta">
-                    <span><i class="far fa-calendar"></i>${formattedDate}</span>
-                    <span><i class="far fa-clock"></i>${formattedTime}</span>
-                    ${project.stars > 0 ? `<span><i class="far fa-star"></i>${project.stars}</span>` : ''}
-                  </div>
-                  
-                  <div class="project-tech">
-                    ${project.language !== 'Unknown' ? `<span class="tech-tag">${project.language}</span>` : ''}
-                    ${project.topics.slice(0, 4).map(topic => `<span class="tech-tag">${topic}</span>`).join('')}
-                  </div>
-                  
-                  <div class="project-links">
-                    <a href="${project.url}" class="btn btn-primary" target="_blank">
-                      <i class="fab fa-github"></i> View Repository
-                    </a>
-                    ${project.homepage ? `<a href="${project.homepage}" class="btn btn-outline" target="_blank"><i class="fas fa-external-link-alt"></i> Demo</a>` : ''}
-                  </div>
-                </div>
-              </div>
-            `;
-          }).join('')}
-        </div>
-      `;
-      
-      container.innerHTML = html;
-    }
-    
-    function formatProjectName(name) {
-      return name
-        .split('-')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-    }
-    
-    // Filter functionality
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        
-        const filter = btn.dataset.filter;
-        
-        if (filter === 'all') {
-          displayProjects(allProjects);
-        } else {
-          const filtered = allProjects.filter(project => {
-            const categories = categorizeProject(project);
-            return categories.includes(filter);
-          });
-          displayProjects(filtered);
-        }
-      });
-    });
-    
-    // Auto-refresh every 5 minutes
-    setInterval(fetchProjects, 5 * 60 * 1000);
-    
-    // Initial load
-    fetchProjects();
-  </script>
+🤖 <strong>AI/ML Security</strong>: Python, TensorFlow, Scikit-learn, NLP
+🛡️ <strong>Cybersecurity</strong>: Penetration Testing, SIEM/SOAR, Threat Intelligence
+☁️ <strong>Cloud/DevSecOps</strong>: AWS, Docker, Ansible, ELK Stack
+🔧 <strong>Tools</strong>: Nmap, Wazuh, VirusTotal API, Metasploit";if(/project|built|work/.test(ql)){const top=allProjects.length>0?allProjects.slice(0,5):[];return(top.length?top.map((p,i)=>`${i+1}. <strong>${fmtName(p.name)}</strong> — ${p.description}`).join('\n'):"Top projects include: Threat Intelligence AI Tool, AI-Powered Security (CANARIE), Ransomware Detection System, AI Automated Security Engineer, CyberSentinel AI")+`\n\n<a href='https://github.com/Mangesh-Bhattacharya' target='_blank' style='color:var(--accent)'>View all on GitHub →</a>`;}if(/education|degree|university|study/.test(ql))return"🎓 Mangesh is pursuing his <strong>Master's in IT Security with AI Specialization</strong> at the <strong>University of Ontario Institute of Technology</strong>. He also studied at Seneca Polytechnic and Humber Polytechnic.";if(/linkedin|connect|contact|reach/.test(ql))return"Connect with Mangesh:\n
+🔗 <a href='https://www.linkedin.com/in/mangesh-bhattacharya' target='_blank' style='color:var(--accent)'>LinkedIn</a>\n💻 <a href='https://github.com/Mangesh-Bhattacharya' target='_blank' style='color:var(--accent)'>GitHub</a>\n🎯 <a href='https://tryhackme.com/p/TheOrbiter' target='_blank' style='color:var(--accent)'>TryHackMe @TheOrbiter</a>";if(/ai.*security|research/.test(ql))return"Mangesh's AI security research:\n
+🤖 AI-powered threat detection using ML & NLP\n🔍 Automated threat intelligence with VirusTotal & ThreatFox\n🛡️ Ransomware detection via file monitoring\n☁️ Cloud security with AWS + Docker + Ansible\n📊 Anomaly detection with n-gram models";if(/github|repo/.test(ql))return`Mangesh has 81+ GitHub repositories!\n⭐ 12+ stars · 891+ contributions\n
+<a href='https://github.com/Mangesh-Bhattacharya' target='_blank' style='color:var(--accent)'>Explore repositories →</a>`;if(/cert|qualification/.test(ql))return"15+ certifications:\n🏆 CompTIA Security+ · AWS Security Specialty · CEH\n🎯 TryHackMe Top % · AI Security Practitioner\n🌐 Cisco Network Security · SANS Threat Intelligence";if(/location|toronto|canada|where/.test(ql))return"Mangesh is based in <strong>Toronto, Ontario, Canada</strong> 🇨🇦. Working at SentinelSync Inc. and studying at Ontario Tech. Open to remote opportunities!";return null;}
+let chatOpen=false,isTyping=false;
+function toggleChat(){chatOpen=!chatOpen;document.getElementById('aiChatPanel').classList.toggle('open',chatOpen);if(chatOpen){document.getElementById('chatInput').focus();}}
+function addMsg(text,isUser){const msgs=document.getElementById('chatMessages');const div=document.createElement('div');div.className='msg '+(isUser?'user':'ai');div.innerHTML=`<div class="msg-avatar">${isUser?'👤':'🤖'}</div><div class="msg-bubble">${text.replace(/\n/g,'<br>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</div>`;msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;if(isUser)document.getElementById('chatSuggestions').style.display='none';}
+function showTyping(){const msgs=document.getElementById('chatMessages');const div=document.createElement('div');div.className='msg ai';div.id='typingIndicator';div.innerHTML='<div class="msg-avatar">🤖</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;}
+function hideTyping(){const el=document.getElementById('typingIndicator');if(el)el.remove();}
+async function sendMessage(){
+  if(isTyping)return;const input=document.getElementById('chatInput');const q=input.value.trim();if(!q)return;input.value='';addMsg(q,true);isTyping=true;showTyping();
+  const ra=ruleAnswer(q);
+  if(ra){await new Promise(r=>setTimeout(r,800+Math.random()*400));hideTyping();addMsg(ra,false);isTyping=false;return;}
+  const GK=window.GEMINI_API_KEY||'';
+  if(GK){try{const pj=allProjects.slice(0,8).map(p=>p.name+': '+p.description).join('; ');const sys=`You are Mangesh Bhattacharya's AI assistant. Name:${CTX.name} Role:${CTX.role} Education:${CTX.edu} Company:${CTX.company} LinkedIn:${CTX.linkedin} GitHub:${CTX.github} Open to work: YES Skills:${CTX.skills.join(',')} Projects:${pj||'Threat Intelligence AI Tool, AI-Powered Security CANARIE, Ransomware Detection, AI Automated Security Engineer'} Be concise, professional and highlight Mangesh's strengths. Question:${q}`;const resp=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GK}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{role:'user',parts:[{text:sys}]}],generationConfig:{maxOutputTokens:400,temperature:0.7}})});const data=await resp.json();const ans=data.candidates?.[0]?.content?.parts?.[0]?.text||'';if(ans){hideTyping();addMsg(ans,false);isTyping=false;return;}}catch(e){}}
+  await new Promise(r=>setTimeout(r,700+Math.random()*500));hideTyping();
+  const fb=["Mangesh is an AI Security Engineer with expertise in threat intelligence, ML security tools, and cloud security. He has 81+ GitHub repos and is open to new opportunities! Ask specifically about his skills, projects, or contact details.",`Mangesh specializes in AI-driven security solutions at SentinelSync Inc. His GitHub shows 81 repositories covering threat detection, ransomware prevention, and cloud security. Any specific area you'd like to know about?`,`Based on Mangesh's profile: highly skilled cybersecurity researcher at Ontario Tech, working at SentinelSync Inc. in Toronto. Top skills: Python, AI/ML security, AWS, threat intelligence. <a href='https://www.linkedin.com/in/mangesh-bhattacharya' target='_blank' style='color:var(--accent)'>Connect on LinkedIn</a>!`];
+  addMsg(fb[Math.floor(Math.random()*fb.length)],false);isTyping=false;
+}
+function sendSuggestion(text){document.getElementById('chatInput').value=text;sendMessage();}
+window.addEventListener('load',()=>{setTimeout(()=>{const l=document.getElementById('loader');l.classList.add('hidden');setTimeout(()=>l.style.display='none',500);},2200);});
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}}),{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.skill-card,.project-card,.cert-card,.timeline-item,.contact-link').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(30px)';el.style.transition='opacity 0.6s ease,transform 0.6s ease';obs.observe(el);});
+const navLinks=document.querySelectorAll('.nav-links a');const secs=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',()=>{const sy=window.scrollY;secs.forEach(s=>{if(sy>=s.offsetTop-80&&sy<s.offsetTop+s.offsetHeight){navLinks.forEach(l=>l.style.color='');const a=document.querySelector(`.nav-links a[href="#${s.id}"]`);if(a)a.style.color='var(--accent)';}});},{passive:true});
+console.log('%c🛡️ Mangesh Bhattacharya - AI Security Portfolio','color:#00d4ff;font-size:18px;font-weight:bold;');
+</script>
 </body>
 </html>

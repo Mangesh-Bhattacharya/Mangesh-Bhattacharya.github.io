@@ -339,131 +339,182 @@ footer{background:var(--surface);border-top:1px solid rgba(255,255,255,0.06);pad
   </div>
 </div>
 <script>
-(function initThreeJS(){
-  const canvas=document.getElementById('canvas3d');
-  if(!canvas||typeof THREE==='undefined')return;
-  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+// Three.js 3D Background
+(function(){
+  if(typeof THREE==='undefined')return;
+  var c=document.getElementById('canvas3d');
+  if(!c)return;
+  var renderer=new THREE.WebGLRenderer({canvas:c,antialias:true,alpha:true});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
   renderer.setSize(window.innerWidth,window.innerHeight);
-  const scene=new THREE.Scene();
-  const camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,1000);
-  camera.position.set(0,0,30);
+  var scene=new THREE.Scene();
+  var camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,1000);
+  camera.position.z=30;
   scene.add(new THREE.AmbientLight(0x0a0a2e,2));
-  const pl1=new THREE.PointLight(0x00d4ff,3,80);pl1.position.set(20,20,20);scene.add(pl1);
-  const pl2=new THREE.PointLight(0x7c3aed,2,80);pl2.position.set(-20,-10,10);scene.add(pl2);
-  const pl3=new THREE.PointLight(0x10b981,1.5,60);pl3.position.set(0,-20,5);scene.add(pl3);
-  const geos=[new THREE.IcosahedronGeometry(1.2,0),new THREE.OctahedronGeometry(1,0),new THREE.TetrahedronGeometry(1.2,0),new THREE.DodecahedronGeometry(1,0),new THREE.TorusGeometry(0.9,0.3,8,16),new THREE.ConeGeometry(0.8,1.6,5)];
-  const mats=[new THREE.MeshPhongMaterial({color:0x00d4ff,wireframe:true,transparent:true,opacity:0.6}),new THREE.MeshPhongMaterial({color:0x7c3aed,wireframe:true,transparent:true,opacity:0.5}),new THREE.MeshPhongMaterial({color:0x10b981,wireframe:true,transparent:true,opacity:0.55}),new THREE.MeshPhongMaterial({color:0x00d4ff,transparent:true,opacity:0.1})];
-  const objs=[];
-  for(let i=0;i<25;i++){
-    const mesh=new THREE.Mesh(geos[Math.floor(Math.random()*geos.length)],mats[Math.floor(Math.random()*mats.length)].clone());
-    mesh.position.set((Math.random()-.5)*35,(Math.random()-.5)*35,(Math.random()-.5)*20-10);
-    const s=0.3+Math.random()*1.2;mesh.scale.set(s,s,s);
-    mesh.userData={rotX:(Math.random()-.5)*.015,rotY:(Math.random()-.5)*.015,fs:0.3+Math.random()*.7,fo:Math.random()*Math.PI*2,oy:mesh.position.y};
-    scene.add(mesh);objs.push(mesh);
+  var pl1=new THREE.PointLight(0x00d4ff,3,80);pl1.position.set(20,20,20);scene.add(pl1);
+  var pl2=new THREE.PointLight(0x7c3aed,2,80);pl2.position.set(-20,-10,10);scene.add(pl2);
+  var geos=[new THREE.IcosahedronGeometry(1.2,0),new THREE.OctahedronGeometry(1,0),new THREE.TorusGeometry(0.9,0.3,8,16),new THREE.ConeGeometry(0.8,1.6,5)];
+  var mats=[new THREE.MeshPhongMaterial({color:0x00d4ff,wireframe:true,transparent:true,opacity:0.6}),new THREE.MeshPhongMaterial({color:0x7c3aed,wireframe:true,transparent:true,opacity:0.5}),new THREE.MeshPhongMaterial({color:0x10b981,wireframe:true,transparent:true,opacity:0.55})];
+  var objs=[];
+  for(var i=0;i<25;i++){
+    var m=new THREE.Mesh(geos[i%geos.length],mats[i%mats.length].clone());
+    m.position.set((Math.random()-.5)*35,(Math.random()-.5)*35,(Math.random()-.5)*20-10);
+    var s=0.3+Math.random()*1.2;m.scale.set(s,s,s);
+    m.userData={rx:(Math.random()-.5)*.015,ry:(Math.random()-.5)*.015,fs:0.3+Math.random()*.7,fo:Math.random()*Math.PI*2,oy:m.position.y};
+    scene.add(m);objs.push(m);
   }
-  const pArr=new Float32Array(500*3);
-  for(let i=0;i<500;i++){pArr[i*3]=(Math.random()-.5)*120;pArr[i*3+1]=(Math.random()-.5)*120;pArr[i*3+2]=(Math.random()-.5)*80-20;}
-  const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pArr,3));
-  const pts=new THREE.Points(pg,new THREE.PointsMaterial({color:0x00d4ff,size:0.15,transparent:true,opacity:0.6}));
+  var pa=new Float32Array(500*3);
+  for(var j=0;j<500;j++){pa[j*3]=(Math.random()-.5)*120;pa[j*3+1]=(Math.random()-.5)*120;pa[j*3+2]=(Math.random()-.5)*80-20;}
+  var pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pa,3));
+  var pts=new THREE.Points(pg,new THREE.PointsMaterial({color:0x00d4ff,size:0.15,transparent:true,opacity:0.6}));
   scene.add(pts);
-  const grid=new THREE.GridHelper(80,40,0x00d4ff,0x0a0f2e);grid.position.y=-15;grid.material.transparent=true;grid.material.opacity=0.15;scene.add(grid);
-  let mx=0,my=0;
-  document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-.5)*2;my=(e.clientY/window.innerHeight-.5)*2;});
-  let t=0;
+  var grid=new THREE.GridHelper(80,40,0x00d4ff,0x0a0f2e);grid.position.y=-15;grid.material.transparent=true;grid.material.opacity=0.15;scene.add(grid);
+  var mx=0,my=0;
+  document.addEventListener('mousemove',function(e){mx=(e.clientX/window.innerWidth-.5)*2;my=(e.clientY/window.innerHeight-.5)*2;});
+  var t=0;
   function anim(){
     requestAnimationFrame(anim);t+=0.01;
     camera.position.x+=(mx*3-camera.position.x)*0.05;camera.position.y+=(-my*2-camera.position.y)*0.05;camera.lookAt(0,0,0);
-    objs.forEach(o=>{o.rotation.x+=o.userData.rotX;o.rotation.y+=o.userData.rotY;o.position.y=o.userData.oy+Math.sin(t*o.userData.fs+o.userData.fo)*1.5;});
+    objs.forEach(function(o){o.rotation.x+=o.userData.rx;o.rotation.y+=o.userData.ry;o.position.y=o.userData.oy+Math.sin(t*o.userData.fs+o.userData.fo)*1.5;});
     pts.rotation.y=t*0.03;pts.rotation.x=t*0.01;
     pl1.intensity=2.5+Math.sin(t*2)*.5;pl2.intensity=1.8+Math.cos(t*1.5)*.4;
     renderer.render(scene,camera);
   }
   anim();
-  window.addEventListener('resize',()=>{renderer.setSize(window.innerWidth,window.innerHeight);camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();});
+  window.addEventListener('resize',function(){renderer.setSize(window.innerWidth,window.innerHeight);camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();});
 })();
-(function initAvatar(){
-  const c=document.getElementById('avatarCanvas');if(!c)return;
-  const ctx=c.getContext('2d'),W=c.width,H=c.height;let a=0;
+
+// Avatar Canvas
+(function(){
+  var c=document.getElementById('avatarCanvas');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height,a=0;
   function draw(){
     ctx.clearRect(0,0,W,H);
-    const bg=ctx.createRadialGradient(W/2,H/2,20,W/2,H/2,160);bg.addColorStop(0,'rgba(10,15,30,0.8)');bg.addColorStop(1,'rgba(3,7,17,0.9)');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    var bg=ctx.createRadialGradient(W/2,H/2,20,W/2,H/2,160);bg.addColorStop(0,'rgba(10,15,30,0.8)');bg.addColorStop(1,'rgba(3,7,17,0.9)');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
     ctx.save();ctx.translate(W/2,H/2);ctx.rotate(a*.5);
-    for(let i=0;i<12;i++){const ang=(i/12)*Math.PI*2;ctx.beginPath();ctx.arc(Math.cos(ang)*130,Math.sin(ang)*130,4,0,Math.PI*2);ctx.fillStyle=`rgba(0,212,255,${.3+Math.sin(a+i)*.3})`;ctx.fill();}
+    for(var i=0;i<12;i++){var ang=(i/12)*Math.PI*2;ctx.beginPath();ctx.arc(Math.cos(ang)*130,Math.sin(ang)*130,4,0,Math.PI*2);ctx.fillStyle='rgba(0,212,255,'+(0.3+Math.sin(a+i)*0.3)+')';ctx.fill();}
     ctx.restore();
     ctx.save();ctx.translate(W/2,H/2);ctx.rotate(Math.sin(a*.3)*.1);
     ctx.beginPath();ctx.moveTo(0,-80);ctx.bezierCurveTo(70,-80,80,-30,80,10);ctx.bezierCurveTo(80,60,40,100,0,110);ctx.bezierCurveTo(-40,100,-80,60,-80,10);ctx.bezierCurveTo(-80,-30,-70,-80,0,-80);
-    const sg=ctx.createLinearGradient(-80,-80,80,110);sg.addColorStop(0,'rgba(0,212,255,0.25)');sg.addColorStop(.5,'rgba(124,58,237,0.2)');sg.addColorStop(1,'rgba(16,185,129,0.25)');
+    var sg=ctx.createLinearGradient(-80,-80,80,110);sg.addColorStop(0,'rgba(0,212,255,0.25)');sg.addColorStop(.5,'rgba(124,58,237,0.2)');sg.addColorStop(1,'rgba(16,185,129,0.25)');
     ctx.fillStyle=sg;ctx.fill();ctx.strokeStyle='rgba(0,212,255,0.7)';ctx.lineWidth=2;ctx.stroke();
-    ctx.fillStyle='rgba(0,212,255,0.9)';ctx.font='bold 48px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🔐',0,10);ctx.restore();
-    ctx.save();ctx.translate(W/2,H/2);const sy=Math.sin(a*1.5)*60;const sg2=ctx.createLinearGradient(-100,sy,100,sy);sg2.addColorStop(0,'rgba(0,212,255,0)');sg2.addColorStop(.5,'rgba(0,212,255,0.5)');sg2.addColorStop(1,'rgba(0,212,255,0)');ctx.strokeStyle=sg2;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-100,sy);ctx.lineTo(100,sy);ctx.stroke();ctx.restore();
+    ctx.fillStyle='rgba(0,212,255,0.9)';ctx.font='bold 48px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('\uD83D\uDD10',0,10);
+    ctx.restore();
+    var sy=Math.sin(a*1.5)*60,sg2=ctx.createLinearGradient(-100,sy,100,sy);
+    sg2.addColorStop(0,'rgba(0,212,255,0)');sg2.addColorStop(.5,'rgba(0,212,255,0.5)');sg2.addColorStop(1,'rgba(0,212,255,0)');
+    ctx.save();ctx.translate(W/2,H/2);ctx.strokeStyle=sg2;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-100,sy);ctx.lineTo(100,sy);ctx.stroke();ctx.restore();
     a+=0.025;requestAnimationFrame(draw);
   }
   draw();
 })();
-const GITHUB_USER='Mangesh-Bhattacharya';let allProjects=[];
-const ICONS={ai:'🤖',security:'🛡️',cloud:'☁️',network:'🌐',default:'💻'};
-const CATS={ai:['ai','ml','machine-learning','neural','intelligence','anomaly','detection','automated','llm','nlp'],security:['security','threat','vulnerability','ransomware','scan','recon','pentest','red-team','stealth','keylogger','malware'],cloud:['cloud','aws','azure','docker','kubernetes','canarie','ansible'],network:['network','cisco','topology','nmap','packet','firewall']};
-function getCat(p){const t=`${p.name} ${p.description} ${(p.topics||[]).join(' ')}`.toLowerCase();for(const[c,kws]of Object.entries(CATS))if(kws.some(k=>t.includes(k)))return c;return'default';}
-function fmtName(n){return n.replace(/[-_]/g,' ').replace(/\b\w/g,l=>l.toUpperCase());}
-async function loadProjects(){
-  try{
-    const r=await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&sort=stars`);
-    const repos=await r.json();
-    allProjects=repos.filter(r=>!r.fork).map(r=>({name:r.name,description:r.description||'Advanced cybersecurity and AI security project',url:r.html_url,language:r.language,stars:r.stargazers_count,homepage:r.homepage,topics:r.topics||[],updated:new Date(r.updated_at),cat:''}));
-    allProjects.forEach(p=>p.cat=getCat(p));
-    allProjects.sort((a,b)=>b.stars-a.stars||b.updated-a.updated);
-    document.getElementById('statProjects').textContent=allProjects.length+'+';
-    document.getElementById('statStars').textContent=allProjects.reduce((s,p)=>s+p.stars,0);
-    renderProjects(allProjects.slice(0,12));
-    document.getElementById('footerUpdate').textContent=`© 2026 · Last synced: ${new Date().toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}`;
-  }catch(e){document.getElementById('projectsGrid').innerHTML='<div class="projects-loader"><p style="color:#f87171">Could not load projects. <a href="https://github.com/Mangesh-Bhattacharya" style="color:var(--accent)" target="_blank">View on GitHub</a></p></div>';}
-}
+
+// GitHub Projects
+var GITHUB_USER='Mangesh-Bhattacharya';
+var allProjects=[];
+var ICONS={ai:'\uD83E\uDD16',security:'\uD83D\uDEE1\uFE0F',cloud:'\u2601\uFE0F',network:'\uD83C\uDF10',def:'\uD83D\uDCBB'};
+var CATS={ai:['ai','ml','machine-learning','neural','intelligence','anomaly','detection','automated','llm','nlp'],security:['security','threat','vulnerability','ransomware','scan','recon','pentest','red-team','stealth','keylogger','malware'],cloud:['cloud','aws','azure','docker','kubernetes','canarie','ansible'],network:['network','cisco','topology','nmap','packet','firewall']};
+function getCat(p){var t=(p.name+' '+p.description+' '+(p.topics||[]).join(' ')).toLowerCase();for(var c in CATS){if(CATS[c].some(function(k){return t.indexOf(k)>-1;}))return c;}return'def';}
+function fmtName(n){return n.replace(/[-_]/g,' ').replace(/\b\w/g,function(l){return l.toUpperCase();});}
 function renderProjects(projects){
-  const grid=document.getElementById('projectsGrid');
+  var grid=document.getElementById('projectsGrid');
   if(!projects.length){grid.innerHTML='<div class="projects-loader"><p>No projects found.</p></div>';return;}
-  grid.innerHTML=projects.map(p=>{const langs=[p.language,...(p.topics||[]).slice(0,3)].filter(Boolean);return`<div class="project-card"><div class="project-header"><div class="project-icon">${ICONS[p.cat]||'💻'}</div>${p.stars?`<div style="font-size:0.8rem;color:var(--muted);">⭐ ${p.stars}</div>`:''}</div><div class="project-title">${fmtName(p.name)}</div><div class="project-desc">${p.description}</div><div class="project-tech">${langs.map(l=>`<span class="tech-badge">${l}</span>`).join('')}</div><div class="project-links"><a href="${p.url}" target="_blank" class="project-link github"><i class="fab fa-github"></i> GitHub</a>${p.homepage?`<a href="${p.homepage}" target="_blank" class="project-link demo"><i class="fas fa-external-link-alt"></i> Demo</a>`:''}</div></div>`;}).join('');
+  var html='';
+  for(var i=0;i<projects.length;i++){
+    var p=projects[i];
+    var langs=[p.language].concat((p.topics||[]).slice(0,3)).filter(Boolean);
+    var techHtml='';for(var j=0;j<langs.length;j++){techHtml+='<span class="tech-badge">'+langs[j]+'</span>';}
+    var starHtml=p.stars?'<div style="font-size:0.8rem;color:var(--muted);">\u2B50 '+p.stars+'</div>':'';
+    var demoHtml=p.homepage?'<a href="'+p.homepage+'" target="_blank" class="project-link demo"><i class="fas fa-external-link-alt"></i> Demo</a>':'';
+    html+='<div class="project-card"><div class="project-header"><div class="project-icon">'+(ICONS[p.cat]||ICONS.def)+'</div>'+starHtml+'</div><div class="project-title">'+fmtName(p.name)+'</div><div class="project-desc">'+p.description+'</div><div class="project-tech">'+techHtml+'</div><div class="project-links"><a href="'+p.url+'" target="_blank" class="project-link github"><i class="fab fa-github"></i> GitHub</a>'+demoHtml+'</div></div>';
+  }
+  grid.innerHTML=html;
 }
-document.getElementById('filterBar').addEventListener('click',e=>{const btn=e.target.closest('.filter-btn');if(!btn)return;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const f=btn.dataset.filter;renderProjects((f==='all'?allProjects:allProjects.filter(p=>p.cat===f)).slice(0,f==='all'?12:20));});
-loadProjects();setInterval(loadProjects,5*60*1000);
-const CTX={name:"Mangesh Bhattacharya",role:"AI Security Engineer & Cybersecurity Researcher",edu:"Master's in IT Security (AI Specialization) at Ontario Tech University",company:"SentinelSync Inc., Toronto ON",linkedin:"https://www.linkedin.com/in/mangesh-bhattacharya",github:"https://github.com/Mangesh-Bhattacharya",skills:["Python","Machine Learning","AI Security","Threat Intelligence","Penetration Testing","AWS","Docker","Ansible","SIEM/SOAR","Network Security","NLP","Anomaly Detection","TypeScript"],open:true};
-function ruleAnswer(q){const ql=q.toLowerCase();if(/hello|hi |hey/.test(ql))return"Hi there! 👋 I'm Mangesh's AI assistant. Ask me about his cybersecurity research, AI security projects, skills, or whether he'd be a great fit for your team!";if(/(open|available).*(work|job|hire|opportunit)|(job|hire|recruit|work).*(open|available|looking)/.test(ql))return"Yes! Mangesh is actively open to opportunities! 🚀 Looking for:
-• AI Security Engineering
-• Cybersecurity Research
-• Threat Intelligence Analysis
-• Cloud Security Architecture
+function loadProjects(){
+  fetch('https://api.github.com/users/'+GITHUB_USER+'/repos?per_page=100&sort=stars').then(function(r){return r.json();}).then(function(repos){
+    allProjects=repos.filter(function(r){return!r.fork;}).map(function(r){return{name:r.name,description:r.description||'Advanced cybersecurity and AI security project',url:r.html_url,language:r.language,stars:r.stargazers_count,homepage:r.homepage,topics:r.topics||[],updated:new Date(r.updated_at),cat:'def'};});
+    allProjects.forEach(function(p){p.cat=getCat(p);});
+    allProjects.sort(function(a,b){return(b.stars-a.stars)||((b.updated)-(a.updated));});
+    var el=document.getElementById('statProjects');if(el)el.textContent=allProjects.length+'+';
+    var stars=allProjects.reduce(function(s,p){return s+p.stars;},0);
+    var el2=document.getElementById('statStars');if(el2)el2.textContent=stars;
+    renderProjects(allProjects.slice(0,12));
+    var fu=document.getElementById('footerUpdate');
+    if(fu)fu.textContent='\u00A9 2026 \u00B7 Last synced: '+new Date().toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+  }).catch(function(){
+    var g=document.getElementById('projectsGrid');if(g)g.innerHTML='<div class="projects-loader"><p style="color:#f87171">Could not load projects. <a href="https://github.com/Mangesh-Bhattacharya" style="color:var(--accent)" target="_blank">View on GitHub</a></p></div>';
+  });
+}
+document.getElementById('filterBar').addEventListener('click',function(e){
+  var btn=e.target.closest('.filter-btn');if(!btn)return;
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  var f=btn.dataset.filter;
+  var filtered=f==='all'?allProjects:allProjects.filter(function(p){return p.cat===f;});
+  renderProjects(filtered.slice(0,f==='all'?12:20));
+});
+loadProjects();
+setInterval(loadProjects,5*60*1000);
 
-Based in Toronto, ON. <a href='https://www.linkedin.com/in/mangesh-bhattacharya' target='_blank' style='color:var(--accent)'>Connect on LinkedIn →</a>";if(/skill|technolog|expert/.test(ql))return"Mangesh's expertise:
-
-🤖 <strong>AI/ML Security</strong>: Python, TensorFlow, Scikit-learn, NLP
-🛡️ <strong>Cybersecurity</strong>: Penetration Testing, SIEM/SOAR, Threat Intelligence
-☁️ <strong>Cloud/DevSecOps</strong>: AWS, Docker, Ansible, ELK Stack
-🔧 <strong>Tools</strong>: Nmap, Wazuh, VirusTotal API, Metasploit";if(/project|built|work/.test(ql)){const top=allProjects.length>0?allProjects.slice(0,5):[];return(top.length?top.map((p,i)=>`${i+1}. <strong>${fmtName(p.name)}</strong> — ${p.description}`).join('\n'):"Top projects include: Threat Intelligence AI Tool, AI-Powered Security (CANARIE), Ransomware Detection System, AI Automated Security Engineer, CyberSentinel AI")+`\n\n<a href='https://github.com/Mangesh-Bhattacharya' target='_blank' style='color:var(--accent)'>View all on GitHub →</a>`;}if(/education|degree|university|study/.test(ql))return"🎓 Mangesh is pursuing his <strong>Master's in IT Security with AI Specialization</strong> at the <strong>University of Ontario Institute of Technology</strong>. He also studied at Seneca Polytechnic and Humber Polytechnic.";if(/linkedin|connect|contact|reach/.test(ql))return"Connect with Mangesh:\n
-🔗 <a href='https://www.linkedin.com/in/mangesh-bhattacharya' target='_blank' style='color:var(--accent)'>LinkedIn</a>\n💻 <a href='https://github.com/Mangesh-Bhattacharya' target='_blank' style='color:var(--accent)'>GitHub</a>\n🎯 <a href='https://tryhackme.com/p/TheOrbiter' target='_blank' style='color:var(--accent)'>TryHackMe @TheOrbiter</a>";if(/ai.*security|research/.test(ql))return"Mangesh's AI security research:\n
-🤖 AI-powered threat detection using ML & NLP\n🔍 Automated threat intelligence with VirusTotal & ThreatFox\n🛡️ Ransomware detection via file monitoring\n☁️ Cloud security with AWS + Docker + Ansible\n📊 Anomaly detection with n-gram models";if(/github|repo/.test(ql))return`Mangesh has 81+ GitHub repositories!\n⭐ 12+ stars · 891+ contributions\n
-<a href='https://github.com/Mangesh-Bhattacharya' target='_blank' style='color:var(--accent)'>Explore repositories →</a>`;if(/cert|qualification/.test(ql))return"15+ certifications:\n🏆 CompTIA Security+ · AWS Security Specialty · CEH\n🎯 TryHackMe Top % · AI Security Practitioner\n🌐 Cisco Network Security · SANS Threat Intelligence";if(/location|toronto|canada|where/.test(ql))return"Mangesh is based in <strong>Toronto, Ontario, Canada</strong> 🇨🇦. Working at SentinelSync Inc. and studying at Ontario Tech. Open to remote opportunities!";return null;}
-let chatOpen=false,isTyping=false;
-function toggleChat(){chatOpen=!chatOpen;document.getElementById('aiChatPanel').classList.toggle('open',chatOpen);if(chatOpen){document.getElementById('chatInput').focus();}}
-function addMsg(text,isUser){const msgs=document.getElementById('chatMessages');const div=document.createElement('div');div.className='msg '+(isUser?'user':'ai');div.innerHTML=`<div class="msg-avatar">${isUser?'👤':'🤖'}</div><div class="msg-bubble">${text.replace(/\n/g,'<br>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</div>`;msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;if(isUser)document.getElementById('chatSuggestions').style.display='none';}
-function showTyping(){const msgs=document.getElementById('chatMessages');const div=document.createElement('div');div.className='msg ai';div.id='typingIndicator';div.innerHTML='<div class="msg-avatar">🤖</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;}
-function hideTyping(){const el=document.getElementById('typingIndicator');if(el)el.remove();}
-async function sendMessage(){
-  if(isTyping)return;const input=document.getElementById('chatInput');const q=input.value.trim();if(!q)return;input.value='';addMsg(q,true);isTyping=true;showTyping();
-  const ra=ruleAnswer(q);
-  if(ra){await new Promise(r=>setTimeout(r,800+Math.random()*400));hideTyping();addMsg(ra,false);isTyping=false;return;}
-  const GK=window.GEMINI_API_KEY||'';
-  if(GK){try{const pj=allProjects.slice(0,8).map(p=>p.name+': '+p.description).join('; ');const sys=`You are Mangesh Bhattacharya's AI assistant. Name:${CTX.name} Role:${CTX.role} Education:${CTX.edu} Company:${CTX.company} LinkedIn:${CTX.linkedin} GitHub:${CTX.github} Open to work: YES Skills:${CTX.skills.join(',')} Projects:${pj||'Threat Intelligence AI Tool, AI-Powered Security CANARIE, Ransomware Detection, AI Automated Security Engineer'} Be concise, professional and highlight Mangesh's strengths. Question:${q}`;const resp=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GK}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{role:'user',parts:[{text:sys}]}],generationConfig:{maxOutputTokens:400,temperature:0.7}})});const data=await resp.json();const ans=data.candidates?.[0]?.content?.parts?.[0]?.text||'';if(ans){hideTyping();addMsg(ans,false);isTyping=false;return;}}catch(e){}}
-  await new Promise(r=>setTimeout(r,700+Math.random()*500));hideTyping();
-  const fb=["Mangesh is an AI Security Engineer with expertise in threat intelligence, ML security tools, and cloud security. He has 81+ GitHub repos and is open to new opportunities! Ask specifically about his skills, projects, or contact details.",`Mangesh specializes in AI-driven security solutions at SentinelSync Inc. His GitHub shows 81 repositories covering threat detection, ransomware prevention, and cloud security. Any specific area you'd like to know about?`,`Based on Mangesh's profile: highly skilled cybersecurity researcher at Ontario Tech, working at SentinelSync Inc. in Toronto. Top skills: Python, AI/ML security, AWS, threat intelligence. <a href='https://www.linkedin.com/in/mangesh-bhattacharya' target='_blank' style='color:var(--accent)'>Connect on LinkedIn</a>!`];
-  addMsg(fb[Math.floor(Math.random()*fb.length)],false);isTyping=false;
+// AI Chatbot
+var chatOpen=false,isTyping=false;
+function toggleChat(){chatOpen=!chatOpen;var panel=document.getElementById('aiChatPanel');if(panel)panel.classList.toggle('open',chatOpen);if(chatOpen){var inp=document.getElementById('chatInput');if(inp)inp.focus();}}
+function addMsg(text,isUser){
+  var msgs=document.getElementById('chatMessages');
+  var div=document.createElement('div');div.className='msg '+(isUser?'user':'ai');
+  div.innerHTML='<div class="msg-avatar">'+(isUser?'\uD83D\uDC64':'\uD83E\uDD16')+'</div><div class="msg-bubble">'+text.replace(/\n/g,'<br>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')+'</div>';
+  msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
+  if(isUser){var s=document.getElementById('chatSuggestions');if(s)s.style.display='none';}
+}
+function showTyping(){var msgs=document.getElementById('chatMessages');var d=document.createElement('div');d.className='msg ai';d.id='typingIndicator';d.innerHTML='<div class="msg-avatar">\uD83E\uDD16</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
+function hideTyping(){var el=document.getElementById('typingIndicator');if(el)el.remove();}
+function ruleAnswer(q){
+  var ql=q.toLowerCase();
+  if(/hello|hi |hey/.test(ql))return"Hi there! \uD83D\uDC4B I'm Mangesh's AI assistant. Ask me about his cybersecurity research, AI security projects, skills, or whether he'd be a great fit for your team!";
+  if(/(open|available).*(work|job|hire|opportunit)|(job|hire|recruit).*(open|available)/.test(ql))return"Yes! Mangesh is actively open to opportunities! \uD83D\uDE80 Looking for:\n\u2022 AI Security Engineering\n\u2022 Cybersecurity Research\n\u2022 Threat Intelligence Analysis\n\u2022 Cloud Security Architecture\n\nBased in Toronto, ON. <a href='https://www.linkedin.com/in/mangesh-bhattacharya' target='_blank' style='color:var(--accent)'>Connect on LinkedIn \u2192</a>";
+  if(/skill|technolog|expert/.test(ql))return"Mangesh's expertise:\n\n\uD83E\uDD16 <strong>AI/ML Security</strong>: Python, TensorFlow, Scikit-learn, NLP\n\uD83D\uDEE1\uFE0F <strong>Cybersecurity</strong>: Penetration Testing, SIEM/SOAR, Threat Intelligence\n\u2601\uFE0F <strong>Cloud/DevSecOps</strong>: AWS, Docker, Ansible, ELK Stack\n\uD83D\uDD27 <strong>Tools</strong>: Nmap, Wazuh, VirusTotal API, Metasploit";
+  if(/project|built|work/.test(ql)){var top=allProjects.length>0?allProjects.slice(0,5):[];var list=top.length?top.map(function(p,i){return(i+1)+'. <strong>'+fmtName(p.name)+'</strong> \u2014 '+p.description;}).join('\n'):"Top projects include: Threat Intelligence AI Tool, AI-Powered Security (CANARIE), Ransomware Detection, AI Automated Security Engineer, CyberSentinel AI";return list+'\n\n<a href=\'https://github.com/Mangesh-Bhattacharya\' target=\'_blank\' style=\'color:var(--accent)\'>View all on GitHub \u2192</a>';}
+  if(/education|degree|university|study/.test(ql))return"\uD83C\uDF93 Mangesh is pursuing his <strong>Master's in IT Security with AI Specialization</strong> at <strong>University of Ontario Institute of Technology</strong>. Also studied at Seneca Polytechnic and Humber Polytechnic.";
+  if(/linkedin|connect|contact|reach/.test(ql))return"Connect with Mangesh:\n\n\uD83D\uDD17 <a href='https://www.linkedin.com/in/mangesh-bhattacharya' target='_blank' style='color:var(--accent)'>LinkedIn</a>\n\uD83D\uDCBB <a href='https://github.com/Mangesh-Bhattacharya' target='_blank' style='color:var(--accent)'>GitHub</a>\n\uD83C\uDFAF <a href='https://tryhackme.com/p/TheOrbiter' target='_blank' style='color:var(--accent)'>TryHackMe @TheOrbiter</a>";
+  if(/ai.*security|research/.test(ql))return"Mangesh's AI security research:\n\n\uD83E\uDD16 AI-powered threat detection using ML & NLP\n\uD83D\uDD0D Automated threat intelligence with VirusTotal & ThreatFox\n\uD83D\uDEE1\uFE0F Ransomware detection via file monitoring\n\u2601\uFE0F Cloud security with AWS + Docker + Ansible\n\uD83D\uDCCA Anomaly detection with n-gram models";
+  if(/github|repo/.test(ql))return"Mangesh has 81+ GitHub repositories!\n\u2B50 12+ stars \u00B7 891+ contributions\n\n<a href='https://github.com/Mangesh-Bhattacharya' target='_blank' style='color:var(--accent)'>Explore repositories \u2192</a>";
+  if(/cert|qualification/.test(ql))return"15+ certifications:\n\uD83C\uDFC6 CompTIA Security+ \u00B7 AWS Security Specialty \u00B7 CEH\n\uD83C\uDFAF TryHackMe Top % \u00B7 AI Security Practitioner\n\uD83C\uDF10 Cisco Network Security \u00B7 SANS Threat Intelligence";
+  if(/location|toronto|canada|where/.test(ql))return"Mangesh is based in <strong>Toronto, Ontario, Canada</strong> \uD83C\uDDE8\uD83C\uDDE6. Working at SentinelSync Inc. and studying at Ontario Tech. Open to remote opportunities!";
+  return null;
+}
+function sendMessage(){
+  if(isTyping)return;
+  var input=document.getElementById('chatInput');
+  var q=input.value.trim();if(!q)return;
+  input.value='';addMsg(q,true);isTyping=true;showTyping();
+  var ra=ruleAnswer(q);
+  if(ra){setTimeout(function(){hideTyping();addMsg(ra,false);isTyping=false;},800+Math.random()*400);return;}
+  var GK=window.GEMINI_API_KEY||'';
+  if(GK){
+    var pj=allProjects.slice(0,8).map(function(p){return p.name+': '+p.description;}).join('; ');
+    var sys='You are Mangesh Bhattacharya AI portfolio assistant. Name: Mangesh Bhattacharya, Role: AI Security Engineer & Cybersecurity Researcher, Education: Masters IT Security AI at Ontario Tech, Company: SentinelSync Inc Toronto, LinkedIn: https://www.linkedin.com/in/mangesh-bhattacharya, GitHub: https://github.com/Mangesh-Bhattacharya, Open to work: YES, Skills: Python ML AI Security Threat Intel Penetration Testing AWS Docker Ansible, Projects: '+pj+'. Be concise friendly. Question: '+q;
+    fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key='+GK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{role:'user',parts:[{text:sys}]}],generationConfig:{maxOutputTokens:400,temperature:0.7}})}).then(function(r){return r.json();}).then(function(data){var ans=data.candidates&&data.candidates[0]&&data.candidates[0].content&&data.candidates[0].content.parts&&data.candidates[0].content.parts[0]&&data.candidates[0].content.parts[0].text||'';if(ans){hideTyping();addMsg(ans,false);isTyping=false;}else{fallback();}}).catch(function(){fallback();});
+    return;
+  }
+  setTimeout(fallback,700+Math.random()*500);
+  function fallback(){
+    hideTyping();
+    var fb=["Mangesh is an AI Security Engineer with expertise in threat intelligence, ML security tools, and cloud security. 81+ GitHub repos and open to opportunities! Ask about his skills, projects, or contact.","Mangesh specializes in AI-driven security at SentinelSync Inc. His GitHub has 81 repos covering threat detection, ransomware prevention, and cloud security. Any specific area?","Highly skilled cybersecurity researcher at Ontario Tech, working at SentinelSync Inc. in Toronto. Skills: Python, AI/ML, AWS, threat intelligence. <a href='https://www.linkedin.com/in/mangesh-bhattacharya' target='_blank' style='color:var(--accent)'>Connect on LinkedIn</a>!"];
+    addMsg(fb[Math.floor(Math.random()*fb.length)],false);isTyping=false;
+  }
 }
 function sendSuggestion(text){document.getElementById('chatInput').value=text;sendMessage();}
-window.addEventListener('load',()=>{setTimeout(()=>{const l=document.getElementById('loader');l.classList.add('hidden');setTimeout(()=>l.style.display='none',500);},2200);});
-const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}}),{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
-document.querySelectorAll('.skill-card,.project-card,.cert-card,.timeline-item,.contact-link').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(30px)';el.style.transition='opacity 0.6s ease,transform 0.6s ease';obs.observe(el);});
-const navLinks=document.querySelectorAll('.nav-links a');const secs=document.querySelectorAll('section[id]');
-window.addEventListener('scroll',()=>{const sy=window.scrollY;secs.forEach(s=>{if(sy>=s.offsetTop-80&&sy<s.offsetTop+s.offsetHeight){navLinks.forEach(l=>l.style.color='');const a=document.querySelector(`.nav-links a[href="#${s.id}"]`);if(a)a.style.color='var(--accent)';}});},{passive:true});
-console.log('%c🛡️ Mangesh Bhattacharya - AI Security Portfolio','color:#00d4ff;font-size:18px;font-weight:bold;');
+
+// Loader
+setTimeout(function(){var l=document.getElementById('loader');if(l){l.classList.add('hidden');setTimeout(function(){l.style.display='none';},500);}},2200);
+
+// Scroll animations
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.skill-card,.project-card,.cert-card,.timeline-item,.contact-link').forEach(function(el){el.style.opacity='0';el.style.transform='translateY(30px)';el.style.transition='opacity 0.6s ease,transform 0.6s ease';obs.observe(el);});
+
+// Active nav
+window.addEventListener('scroll',function(){var sy=window.scrollY;document.querySelectorAll('section[id]').forEach(function(s){if(sy>=s.offsetTop-80&&sy<s.offsetTop+s.offsetHeight){document.querySelectorAll('.nav-links a').forEach(function(l){l.style.color='';});var a=document.querySelector('.nav-links a[href="#'+s.id+'"]');if(a)a.style.color='var(--accent)';}});},{passive:true});
+
+console.log('%c\uD83D\uDEE1\uFE0F Mangesh Bhattacharya - AI Security Portfolio','color:#00d4ff;font-size:18px;font-weight:bold;');
 </script>
 </body>
 </html>

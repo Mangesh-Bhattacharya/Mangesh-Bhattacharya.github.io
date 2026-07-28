@@ -164,7 +164,7 @@ export const projects: {
     category: "AI & Threat Detection",
     metrics: ["115 statistical features", "9 IoT devices, 10 attack types"],
     stack: ["Python", "Scikit-learn", "N-BaIoT Dataset"],
-    link: "https://github.com/Mangesh-Bhattacharya/IoT_Botnet_Detection_via_NTA_using_ML",
+    link: "https://github.com/Mangesh-Bhattacharya/IoT-Botnet-Detect-via-NTA-using-ML",
   },
   {
     id: "graph-ids",

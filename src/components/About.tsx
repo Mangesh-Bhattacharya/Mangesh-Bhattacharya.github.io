@@ -6,7 +6,7 @@ import { Reveal } from "./ui/Reveal";
 const facts = [
   { icon: MapPin, label: profile.location },
   { icon: GraduationCap, label: "MITS-AI Graduate Student, Ontario Tech University" },
-  { icon: ShieldCheck, label: "Cybersecurity Analyst & Bug Bounty Hunter" },
+  { icon: ShieldCheck, label: "Open to Work — Full-Time & Contract Roles" },
   { icon: Cpu, label: "AI-Driven Detection · Cloud Security · DevSecOps" },
 ];
 

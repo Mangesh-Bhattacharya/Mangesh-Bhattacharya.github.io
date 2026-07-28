@@ -69,7 +69,7 @@ export function Contact() {
                 </span>
                 <div>
                   <p className="text-xs text-muted">LinkedIn</p>
-                  <p className="font-medium text-foreground">/in/mangeshbhattacharya</p>
+                  <p className="font-medium text-foreground">/in/mangesh-bhattacharya</p>
                 </div>
               </a>
 

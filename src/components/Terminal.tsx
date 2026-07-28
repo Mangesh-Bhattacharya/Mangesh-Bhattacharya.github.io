@@ -103,7 +103,7 @@ function runCommand(raw: string): string {
       return [
         "[sudo] password for recruiter: ********",
         "Permission granted. Escalating to: Full-Time Offer",
-        "Initiating handshake with mangeshb20@gmail.com ...",
+        `Initiating handshake with ${profile.email} ...`,
         "Connection established. Let's build something secure together.",
       ].join("\n");
 

@@ -42,13 +42,13 @@ export function Education() {
                 <Award size={20} />
                 <h3 className="text-base font-semibold text-foreground">Certifications</h3>
               </div>
-              <div className="flex flex-col gap-3">
+              <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                 {certifications.map((c) => (
                   <div
                     key={c}
-                    className="card-glow flex items-center gap-3 rounded-xl border border-border bg-surface-2 p-4 text-sm text-foreground/90"
+                    className="card-glow flex items-center gap-2.5 rounded-xl border border-border bg-surface-2 p-3 text-xs leading-snug text-foreground/90 sm:text-[13px]"
                   >
-                    <span className="h-2 w-2 shrink-0 rounded-full bg-amber" />
+                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-amber" />
                     {c}
                   </div>
                 ))}

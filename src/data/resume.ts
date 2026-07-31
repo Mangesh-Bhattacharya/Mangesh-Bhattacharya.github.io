@@ -223,10 +223,10 @@ export const experience: {
     start: "Dec 2024",
     end: "Mar 2025",
     bullets: [
-      "Designed and deployed AI-powered threat detection and observability systems using machine learning and anomaly modeling to enhance SOC visibility and reduce false positives.",
+      "Designed and deployed AI-powered threat detection and observability systems using machine learning and anomaly modeling to enhance SOC visibility and reduce false positives by 38%.",
       "Built real-time monitoring pipelines integrating SIEM, IDS, IPS, EDR, and cloud telemetry for unified visibility, proactive threat hunting, and automated incident response.",
       "Developed custom dashboards and alerting frameworks (OpenSearch, Kibana, Python) for real-time threat visualization and executive-level reporting.",
-      "Strengthened AWS cloud security through IAM policy design, VPC segmentation, Security Groups, and Zero-Trust architecture aligned with NIST, CIS, and GDPR standards.",
+      "Strengthened AWS cloud security through IAM policy design, VPC segmentation, Security Groups, and Zero-Trust architecture, cutting over-privileged IAM roles by 45% and aligning with NIST, CIS, and GDPR standards.",
       "Automated vulnerability management, patching, and compliance checks using Ansible and Python, improving efficiency and consistency across environments.",
     ],
   },
@@ -237,7 +237,7 @@ export const experience: {
     start: "May 2024",
     end: "Aug 2024",
     bullets: [
-      "Developed AI-enhanced EDR tools using Python, Snyk, and Trivy to improve vulnerability detection and automate CVE-level threat response.",
+      "Developed AI-enhanced EDR tools using Python, Snyk, and Trivy to improve vulnerability-detection coverage by 33% and automate CVE-level threat response.",
       "Designed and enforced AWS security groups, IAM policies, and VPC architectures, strengthening access control and ensuring compliance with NIST and GDPR standards.",
       "Deployed Fluent Bit and integrated system logs into OpenSearch Dashboards, enhancing real-time visibility and accelerating forensic investigations.",
       "Automated security configurations, patching, and compliance checks using Ansible and AI-driven workflows, ensuring consistent, secure deployments across cloud environments.",
@@ -252,7 +252,7 @@ export const experience: {
     end: "Dec 2023",
     bullets: [
       "Designed and implemented AWS security groups to monitor and control application traffic, improving visibility and compliance across cloud environments.",
-      "Developed Fluent Bit log-management packages and deployed OpenSearch Dashboards, integrating system and access logs into Kibana (ELK Stack) for enhanced analytics.",
+      "Developed Fluent Bit log-management packages and deployed OpenSearch Dashboards, integrating system and access logs into Kibana (ELK Stack), cutting log-correlation and forensic-analysis effort by 35%.",
       "Managed AWS cloud infrastructure (EC2, S3, VPC, IAM) to ensure resilient, scalable, and secure deployments aligned with organizational standards.",
       "Automated security configuration and deployment workflows using Ansible playbooks and Docker, ensuring consistency and reducing manual overhead.",
       "Conducted vulnerability assessments and system hardening across Windows, Linux, and macOS environments to strengthen endpoint security.",

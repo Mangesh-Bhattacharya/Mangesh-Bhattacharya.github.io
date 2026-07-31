@@ -192,8 +192,8 @@ export const experience: {
     role: "DevSecOps Engineer",
     org: "Upwork · Freelance",
     location: "Toronto, ON — Remote",
-    start: "Jan 2026",
-    end: "May 2026",
+    start: "Aug 2025",
+    end: "Jan 2026",
     bullets: [
       "Built automated vulnerability-scanning pipelines that accelerated detection workflows and expanded coverage across client applications and cloud environments.",
       "Delivered clear, actionable remediation reports with reproducible steps, enabling clients to resolve issues efficiently and strengthen their security posture.",
@@ -206,8 +206,8 @@ export const experience: {
     role: "Cybersecurity Engineer",
     org: "Upwork · Permanent Part-time",
     location: "Toronto, ON — Remote",
-    start: "Aug 2025",
-    end: "Nov 2025",
+    start: "Apr 2025",
+    end: "Jul 2025",
     bullets: [
       "Architected production-grade User and Entity Behavior Analytics (UEBA) using heuristic analysis and machine learning for real-time anomaly detection.",
       "Designed and executed high-fidelity adversarial emulations leveraging MITRE ATT&CK frameworks and custom payload obfuscation to bypass EDR/XDR solutions.",
@@ -221,7 +221,7 @@ export const experience: {
     org: "Ameya Data Solutions · Co-op",
     location: "Mississauga, ON — Hybrid",
     start: "Dec 2024",
-    end: "May 2025",
+    end: "Mar 2025",
     bullets: [
       "Designed and deployed AI-powered threat detection and observability systems using machine learning and anomaly modeling to enhance SOC visibility and reduce false positives.",
       "Built real-time monitoring pipelines integrating SIEM, IDS, IPS, EDR, and cloud telemetry for unified visibility, proactive threat hunting, and automated incident response.",

@@ -189,34 +189,6 @@ export const experience: {
   bullets: string[];
 }[] = [
   {
-    role: "DevSecOps Engineer",
-    org: "Upwork · Freelance",
-    location: "Toronto, ON — Remote",
-    start: "Aug 2025",
-    end: "Jan 2026",
-    bullets: [
-      "Built automated vulnerability-scanning pipelines that accelerated detection workflows and expanded coverage across client applications and cloud environments.",
-      "Delivered clear, actionable remediation reports with reproducible steps, enabling clients to resolve issues efficiently and strengthen their security posture.",
-      "Partnered with development teams to prioritize fixes, streamline remediation cycles, and reduce average time-to-patch across CI/CD pipelines.",
-      "Performed web and mobile application security assessments, reducing exploitable vulnerabilities and improving client confidence in deployed systems.",
-      "Executed comprehensive audits of existing security controls, identifying critical gaps and implementing targeted improvements to reinforce system integrity.",
-    ],
-  },
-  {
-    role: "Cybersecurity Engineer",
-    org: "Upwork · Permanent Part-time",
-    location: "Toronto, ON — Remote",
-    start: "Apr 2025",
-    end: "Jul 2025",
-    bullets: [
-      "Architected production-grade User and Entity Behavior Analytics (UEBA) using heuristic analysis and machine learning for real-time anomaly detection.",
-      "Designed and executed high-fidelity adversarial emulations leveraging MITRE ATT&CK frameworks and custom payload obfuscation to bypass EDR/XDR solutions.",
-      "Engineered end-to-end SOAR workflows with Python and TensorFlow to accelerate Mean Time to Detect (MTTD) and Mean Time to Respond (MTTR).",
-      "Conducted deep-dive attack-surface management using graph theory and network topology visualization to identify hidden lateral-movement vectors and privilege-escalation paths.",
-      "Collaborated with enterprise clients to translate IAM requirements into least-privilege algorithmic solutions, utilizing Zero Trust principles to harden perimeter-less environments.",
-    ],
-  },
-  {
     role: "Cybersecurity Observability & AI Engineer",
     org: "Ameya Data Solutions · Co-op",
     location: "Mississauga, ON — Hybrid",

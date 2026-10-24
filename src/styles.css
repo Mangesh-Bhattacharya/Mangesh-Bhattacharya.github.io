@@ -1,0 +1,222 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-border-emph: var(--border-emph);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-warning: var(--warning);
+  --color-success: var(--success);
+  --color-info: var(--info);
+  --color-term: var(--term);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+/* vNAS theme — dark brown base with burnt-orange accents */
+:root {
+  --radius: 0.625rem; /* 10px card radius */
+  --background: oklch(0.164708 0.020317 57.050);
+  --foreground: oklch(0.950685 0.015475 67.640);
+  --card: oklch(0.228397 0.025131 63.318);
+  --card-foreground: oklch(0.950685 0.015475 67.640);
+  --popover: oklch(0.228397 0.025131 63.318);
+  --popover-foreground: oklch(0.950685 0.015475 67.640);
+  --primary: oklch(0.780098 0.159818 65.000);
+  --primary-hover: oklch(0.827557 0.129345 66.473);
+  --primary-foreground: oklch(0.164708 0.020317 57.050);
+  --secondary: oklch(0.242031 0.031693 59.188);
+  --secondary-foreground: oklch(0.950685 0.015475 67.640);
+  --muted: oklch(0.242031 0.031693 59.188);
+  --muted-foreground: oklch(0.856706 0.017641 67.589);
+  --accent: oklch(0.293368 0.042987 53.400);
+  --accent-foreground: oklch(0.827557 0.129345 66.473);
+  --destructive: oklch(0.697972 0.169808 35.208);
+  --destructive-foreground: oklch(0.164708 0.020317 57.050);
+  --warning: oklch(0.780098 0.159818 65.000);
+  --success: oklch(0.699031 0.140034 150.043);
+  --info: oklch(0.750119 0.130639 240.109);
+  --term: oklch(0.140138 0.005174 86.596);
+  --border: oklch(0.293368 0.042987 53.400);
+  --border-emph: oklch(0.366536 0.054385 49.773);
+  --input: oklch(0.366536 0.054385 49.773);
+  --ring: oklch(0.780098 0.159818 65.000 / 0.7020);
+  --shadow-card-hover: 0 6px 18px -10px oklch(0 0 0 / 0.75);
+  --shadow-control-hover: 0 3px 8px -4px oklch(0 0 0 / 0.7);
+  --interaction-duration: 180ms;
+  --interaction-ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Terminal stays dark using the vNAS dark palette with amber prompt accents */
+.bg-term {
+  --background: oklch(0.140138 0.005174 86.596);
+  --foreground: oklch(0.950100 0.003442 67.782);
+  --card: oklch(0.190465 0.008860 59.082);
+  --card-foreground: oklch(0.950100 0.003442 67.782);
+  --popover: oklch(0.190465 0.008860 59.082);
+  --popover-foreground: oklch(0.950100 0.003442 67.782);
+  --secondary: oklch(0.219282 0.004959 67.565);
+  --secondary-foreground: oklch(0.950100 0.003442 67.782);
+  --muted: oklch(0.219282 0.004959 67.565);
+  --muted-foreground: oklch(0.767336 0.012698 67.637);
+  --primary: oklch(0.780098 0.159818 65.000);
+  --primary-hover: oklch(0.827557 0.129345 66.473);
+  --primary-foreground: oklch(0.140138 0.005174 86.596);
+  --accent: oklch(0.319732 0.072766 63.266);
+  --accent-foreground: oklch(0.799297 0.140215 64.842);
+  --destructive: oklch(0.65 0.22 25);
+  --destructive-foreground: oklch(0.140138 0.005174 86.596);
+  --warning: oklch(0.780098 0.159818 65.000);
+  --success: oklch(0.699031 0.140034 150.043);
+  --info: oklch(0.750119 0.130639 240.109);
+  --border: oklch(0.280890 0.005586 91.573);
+  --border-emph: oklch(0.360964 0.005784 78.255);
+  --input: oklch(0.360964 0.005784 78.255);
+  --ring: oklch(0.780098 0.159818 65.000 / 0.7020);
+}
+
+/* vNAS theme — dark mode (same brown/amber base) */
+.dark {
+  --background: oklch(0.164708 0.020317 57.050);
+  --foreground: oklch(0.950685 0.015475 67.640);
+  --card: oklch(0.228397 0.025131 63.318);
+  --card-foreground: oklch(0.950685 0.015475 67.640);
+  --popover: oklch(0.228397 0.025131 63.318);
+  --popover-foreground: oklch(0.950685 0.015475 67.640);
+  --primary: oklch(0.780098 0.159818 65.000);
+  --primary-hover: oklch(0.827557 0.129345 66.473);
+  --primary-foreground: oklch(0.164708 0.020317 57.050);
+  --secondary: oklch(0.242031 0.031693 59.188);
+  --secondary-foreground: oklch(0.950685 0.015475 67.640);
+  --muted: oklch(0.242031 0.031693 59.188);
+  --muted-foreground: oklch(0.856706 0.017641 67.589);
+  --accent: oklch(0.293368 0.042987 53.400);
+  --accent-foreground: oklch(0.827557 0.129345 66.473);
+  --destructive: oklch(0.697972 0.169808 35.208);
+  --destructive-foreground: oklch(0.164708 0.020317 57.050);
+  --warning: oklch(0.780098 0.159818 65.000);
+  --success: oklch(0.699031 0.140034 150.043);
+  --info: oklch(0.750119 0.130639 240.109);
+  --term: oklch(0.140138 0.005174 86.596);
+  --border: oklch(0.293368 0.042987 53.400);
+  --border-emph: oklch(0.366536 0.054385 49.773);
+  --input: oklch(0.366536 0.054385 49.773);
+  --ring: oklch(0.780098 0.159818 65.000 / 0.7020);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  * { letter-spacing: 0; }
+  a:focus-visible { outline: 2px solid var(--ring); outline-offset: 4px; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--primary); color: var(--primary-foreground); }
+}
+
+@utility grid-bg {
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 75%);
+}
+
+@utility glow {
+  box-shadow: 0 0 0 1px var(--border), 0 30px 80px -30px color-mix(in oklab, var(--primary) 35%, transparent);
+}
+
+@utility term-panel {
+  box-shadow: 0 26px 60px -34px oklch(0 0 0 / 0.9), 0 0 70px -34px color-mix(in oklab, var(--primary) 40%, transparent);
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+@utility caret { animation: blink 1s step-end infinite; }
+
+@keyframes marquee { to { transform: translateX(-50%); } }
+@utility marquee { animation: marquee 40s linear infinite; }
+
+@utility control-feedback {
+  transition-property: background-color, color, border-color, box-shadow;
+  transition-duration: var(--interaction-duration);
+  transition-timing-function: var(--interaction-ease);
+  &:active:not(:disabled):not([aria-disabled="true"]) { box-shadow: none; }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover:not(:disabled):not([aria-disabled="true"]) { box-shadow: var(--shadow-control-hover); }
+  }
+}
+
+@utility card-feedback {
+  transition-property: border-color, box-shadow, background-color;
+  transition-duration: var(--interaction-duration);
+  transition-timing-function: var(--interaction-ease);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover { border-color: var(--border-emph); box-shadow: var(--shadow-card-hover); }
+  }
+}
+
+@utility linked-card-feedback {
+  transition-property: border-color, box-shadow, transform;
+  transition-duration: var(--interaction-duration);
+  transition-timing-function: var(--interaction-ease);
+  &:focus-visible { border-color: var(--primary); box-shadow: var(--shadow-card-hover); }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover { border-color: var(--primary); box-shadow: var(--shadow-card-hover); }
+  }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    &:hover { transform: translateY(-2px); }
+  }
+}
+
+@utility nav-feedback {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0.75rem;
+    bottom: 0.35rem;
+    height: 1px;
+    background-color: var(--primary);
+    opacity: 0;
+    transition: opacity var(--interaction-duration) var(--interaction-ease);
+  }
+  &:focus-visible::after { opacity: 1; }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover::after { opacity: 1; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
